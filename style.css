@@ -594,10 +594,21 @@ em {
 
 .mission-card--wide {
   grid-column: span 3;
-  display: grid;
-  grid-template-columns: auto auto 1fr;
-  align-items: start;
-  gap: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/* Groupement icône + titre + description pour la carte wide */
+.mission-card--wide .mission-card__icon {
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+.mission-card--wide .mission-card__title {
+  margin-bottom: 0.4rem;
+}
+.mission-card--wide .mission-card__desc {
+  margin-bottom: 0;
 }
 
 .mission-card__number {
@@ -612,7 +623,7 @@ em {
 
 .mission-card--wide .mission-card__number {
   margin-bottom: 0;
-  padding-top: 0.3rem;
+  flex-shrink: 0;
 }
 
 .mission-card__icon {
@@ -624,10 +635,6 @@ em {
   transition: opacity 0.2s;
 }
 .mission-card:hover .mission-card__icon { opacity: 1; }
-
-.mission-card--wide .mission-card__icon {
-  margin-bottom: 0;
-}
 
 .mission-card__title {
   font-size: 1.2rem;
@@ -1136,7 +1143,6 @@ em {
   }
   .mission-card--wide {
     grid-column: span 2;
-    grid-template-columns: auto 1fr;
   }
   .modelisation-layout {
     grid-template-columns: 1fr;
@@ -1234,11 +1240,14 @@ em {
   }
   .mission-card--wide {
     grid-column: span 1;
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  .mission-card--wide .mission-card__number,
+  .mission-card--wide .mission-card__number {
+    margin-bottom: 1rem;
+  }
   .mission-card--wide .mission-card__icon {
-    margin-bottom: 0;
+    margin-bottom: 1rem;
   }
 
   /* Stats */
