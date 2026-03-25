@@ -573,7 +573,7 @@ em {
 
 .missions-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5px;
   background: var(--c-border);
   border: 1px solid var(--c-border);
