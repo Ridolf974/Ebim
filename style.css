@@ -450,6 +450,121 @@ em {
 }
 
 /* ════════════════════════════════════════════════════════
+   MOT DU CEO
+════════════════════════════════════════════════════════ */
+.ceo {
+  background: var(--c-bg);
+  padding: var(--space-lg) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.ceo::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 300px;
+  background: radial-gradient(ellipse, rgba(0, 210, 255, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ceo-layout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-lg);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 3.5rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+  position: relative;
+}
+
+.ceo-quote-block {
+  position: relative;
+}
+
+.ceo-quote-mark {
+  font-family: var(--font-display);
+  font-size: 6rem;
+  line-height: 0.6;
+  color: var(--c-accent);
+  opacity: 0.25;
+  display: block;
+  margin-bottom: 1rem;
+  user-select: none;
+}
+
+.ceo-quote {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--c-text);
+  line-height: 1.8;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ceo-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  text-align: center;
+  padding-left: var(--space-lg);
+  border-left: 1px solid var(--c-border);
+}
+
+.ceo-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--c-accent-2), var(--c-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ceo-avatar__initials {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--c-bg);
+  letter-spacing: 0.05em;
+}
+
+.ceo-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--c-white);
+  white-space: nowrap;
+}
+
+.ceo-title {
+  font-size: 0.8rem;
+  color: var(--c-accent);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.ceo-diploma {
+  font-size: 0.75rem;
+  color: var(--c-text-muted);
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+/* ════════════════════════════════════════════════════════
    MISSIONS BIM
 ════════════════════════════════════════════════════════ */
 .missions {
@@ -1034,6 +1149,25 @@ em {
   :root {
     --space-xl: 4rem;
     --space-lg: 2.5rem;
+  }
+
+  /* CEO */
+  .ceo-layout {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+    text-align: center;
+  }
+  .ceo-identity {
+    border-left: none;
+    border-top: 1px solid var(--c-border);
+    padding-left: 0;
+    padding-top: var(--space-md);
+    flex-direction: row;
+    text-align: left;
+    justify-content: center;
+  }
+  .ceo-name, .ceo-title, .ceo-diploma {
+    white-space: normal;
   }
 
   /* Nav mobile */
