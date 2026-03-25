@@ -124,3 +124,4 @@ Organisme certifié Qualiopi. Déclaration d'activité n° 04 97 31 52 497.
 - Toujours créer une Pull Request, jamais committer directement sur `main`
 - Code commenté en français
 - Ne jamais copier le style du site actuel (ebim-ing.re) — contenu uniquement
+- Suivre les directives de design définies dans `.claude/SKILL.md` pour tous les fichiers CSS et visuels
