@@ -125,3 +125,4 @@ Organisme certifié Qualiopi. Déclaration d'activité n° 04 97 31 52 497.
 - Code commenté en français
 - Ne jamais copier le style du site actuel (ebim-ing.re) — contenu uniquement
 - Suivre les directives de design définies dans `.claude/SKILL.md` pour tous les fichiers CSS et visuels
+- Utiliser le skill UI/UX Pro Max pour les décisions de design : `python3 .claude/ui-ux-pro-max/scripts/search.py "<query>" --domain <style|typography|color|ux>`
