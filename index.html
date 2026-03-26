@@ -7,223 +7,284 @@
   <meta name="description" content="Bureau d'études réunionnais spécialisé en BIM Management. AMO BIM, Modélisation de l'existant, Commissionnement, Formations BIM." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Karla:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════
-       NAVIGATION
-  ═══════════════════════════════════════════ -->
-  <header class="nav-header" id="nav-header">
-    <nav class="nav-inner">
-      <a href="#accueil" class="nav-logo" aria-label="eBIM Ingénierie — accueil">
-        <img src="https://ebim-ing.re/images/ebim-logo.svg" alt="eBIM Ingénierie" class="logo-img" />
+  <!-- ── CURSEUR CUSTOM ───────────────────────────────── -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-follower" id="cursor-follower" aria-hidden="true"></div>
+
+  <!-- ── NAVIGATION ───────────────────────────────────── -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#accueil" class="nav-logo" aria-label="eBIM Ingénierie">
+        <img src="https://ebim-ing.re/images/ebim-logo.svg" alt="eBIM Ingénierie" class="nav-logo__img" />
       </a>
+      <nav class="nav-links" id="nav-links" aria-label="Navigation principale">
+        <a href="#accueil"      class="nav-link" data-section="accueil">Accueil</a>
+        <a href="#missions"     class="nav-link" data-section="missions">Missions</a>
+        <a href="#modelisation" class="nav-link" data-section="modelisation">Modélisation</a>
+        <a href="#formations"   class="nav-link" data-section="formations">Formations</a>
+        <a href="#contact"      class="nav-link nav-link--cta" data-section="contact">Contact</a>
+      </nav>
       <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+        <span></span><span></span>
       </button>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#accueil"          class="nav-link" data-section="accueil">Accueil</a></li>
-        <li><a href="#missions"         class="nav-link" data-section="missions">Missions BIM</a></li>
-        <li><a href="#modelisation"     class="nav-link" data-section="modelisation">Modélisation</a></li>
-        <li><a href="#formations"       class="nav-link" data-section="formations">Formations BIM</a></li>
-        <li><a href="#contact"          class="nav-link nav-link--cta" data-section="contact">Contact</a></li>
-      </ul>
-    </nav>
+    </div>
   </header>
 
   <main>
 
-    <!-- ═══════════════════════════════════════════
-         HERO — ACCUEIL
-    ═══════════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════════════
+         HERO
+    ══════════════════════════════════════════════════ -->
     <section class="hero" id="accueil">
-      <div class="hero-bg">
-        <div class="hero-grid"></div>
-        <div class="hero-glow"></div>
+
+      <!-- Grain de fond -->
+      <div class="hero-grain" aria-hidden="true"></div>
+
+      <!-- Ligne décorative diagonale -->
+      <div class="hero-diag" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+
+        <div class="hero-left">
+          <p class="hero-pretitle split-reveal">
+            <span class="mono">La Réunion · Océan Indien · Métropole</span>
+          </p>
+
+          <h1 class="hero-title">
+            <span class="hero-title__row split-reveal">
+              <span class="hero-title__word">BIM</span>
+            </span>
+            <span class="hero-title__row split-reveal split-reveal--d1">
+              <span class="hero-title__word hero-title__word--outline">Manage</span><span class="hero-title__word hero-title__accent">ment</span>
+            </span>
+            <span class="hero-title__row split-reveal split-reveal--d2">
+              <span class="hero-title__word">&amp; Ingénierie</span>
+            </span>
+          </h1>
+
+          <p class="hero-desc split-reveal split-reveal--d3">
+            Bureau d'études spécialisé dans le <em>Building Information Modeling</em> —
+            AMO BIM, Modélisation de l'existant, Commissionnement, Formation.
+          </p>
+
+          <div class="hero-actions split-reveal split-reveal--d4">
+            <a href="#missions" class="btn btn--orange">Nos missions</a>
+            <a href="#contact"  class="btn btn--ghost">Nous contacter <span class="btn__arrow">→</span></a>
+          </div>
+        </div>
+
+        <div class="hero-right" aria-hidden="true">
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat__num mono" data-target="94">0</span><span class="hero-stat__unit mono">%</span>
+              <p class="hero-stat__label">objectifs atteints en formation</p>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat__num mono" data-target="97">0</span><span class="hero-stat__unit mono">%</span>
+              <p class="hero-stat__label">apprenants satisfaits</p>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat__num mono" data-target="4">0</span><span class="hero-stat__unit mono">+</span>
+              <p class="hero-stat__label">références majeures</p>
+            </div>
+          </div>
+          <!-- SVG décoratif — wireframe bâtiment -->
+          <svg class="hero-wireframe" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="80" y="200" width="240" height="160" stroke="currentColor" stroke-width="0.8" opacity="0.25"/>
+            <rect x="120" y="120" width="160" height="80" stroke="currentColor" stroke-width="0.8" opacity="0.2"/>
+            <rect x="160" y="60" width="80" height="60" stroke="currentColor" stroke-width="0.8" opacity="0.15"/>
+            <line x1="80" y1="200" x2="160" y2="120" stroke="currentColor" stroke-width="0.6" opacity="0.2"/>
+            <line x1="320" y1="200" x2="280" y2="120" stroke="currentColor" stroke-width="0.6" opacity="0.2"/>
+            <line x1="120" y1="120" x2="160" y2="60" stroke="currentColor" stroke-width="0.6" opacity="0.15"/>
+            <line x1="280" y1="120" x2="240" y2="60" stroke="currentColor" stroke-width="0.6" opacity="0.15"/>
+            <!-- fenêtres -->
+            <rect x="100" y="240" width="30" height="40" stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
+            <rect x="150" y="240" width="30" height="40" stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
+            <rect x="200" y="240" width="30" height="40" stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
+            <rect x="250" y="240" width="30" height="40" stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
+            <rect x="140" y="140" width="25" height="25" stroke="currentColor" stroke-width="0.6" opacity="0.2"/>
+            <rect x="180" y="140" width="25" height="25" stroke="currentColor" stroke-width="0.6" opacity="0.2"/>
+            <rect x="220" y="140" width="25" height="25" stroke="currentColor" stroke-width="0.6" opacity="0.2"/>
+            <!-- grille de fond -->
+            <line x1="0" y1="100" x2="400" y2="100" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
+            <line x1="0" y1="200" x2="400" y2="200" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
+            <line x1="0" y1="300" x2="400" y2="300" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
+            <line x1="100" y1="0" x2="100" y2="400" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
+            <line x1="200" y1="0" x2="200" y2="400" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
+            <line x1="300" y1="0" x2="300" y2="400" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
+          </svg>
+        </div>
+
       </div>
-      <div class="hero-content">
-        <div class="hero-tag reveal">La Réunion · Océan Indien · Métropole</div>
-        <h1 class="hero-title reveal reveal--delay-1">
-          <span class="hero-title__line">BIM</span>
-          <span class="hero-title__line hero-title__line--accent">Management</span>
-          <span class="hero-title__line">& Ingénierie</span>
-        </h1>
-        <p class="hero-sub reveal reveal--delay-2">
-          BIM · Modélisation de l'existant · Commissionnement · Formation
-        </p>
-        <p class="hero-desc reveal reveal--delay-3">
-          Bureau d'études réunionnais spécialisé dans le <em>Building Information Modeling</em>,
-          eBIM Ingénierie assure l'accompagnement AMO BIM, le BIM Management, la modélisation
-          de l'existant et les formations multi-niveaux.
-        </p>
-        <div class="hero-actions reveal reveal--delay-4">
-          <a href="#missions" class="btn btn--primary">Nos missions</a>
-          <a href="#contact"  class="btn btn--ghost">Nous contacter</a>
+
+      <div class="hero-ticker" aria-hidden="true">
+        <div class="hero-ticker__inner">
+          <span>AMO BIM</span><span class="sep">·</span>
+          <span>BIM Management</span><span class="sep">·</span>
+          <span>Synthèse numérique</span><span class="sep">·</span>
+          <span>Modélisation de l'existant</span><span class="sep">·</span>
+          <span>Commissionnement</span><span class="sep">·</span>
+          <span>Formations BIM</span><span class="sep">·</span>
+          <span>AMO BIM</span><span class="sep">·</span>
+          <span>BIM Management</span><span class="sep">·</span>
+          <span>Synthèse numérique</span><span class="sep">·</span>
+          <span>Modélisation de l'existant</span><span class="sep">·</span>
+          <span>Commissionnement</span><span class="sep">·</span>
+          <span>Formations BIM</span><span class="sep">·</span>
         </div>
       </div>
-      <div class="hero-scroll-indicator" aria-hidden="true">
-        <span class="scroll-line"></span>
-        <span class="scroll-label">Scroll</span>
-      </div>
+
     </section>
 
-    <!-- ═══════════════════════════════════════════
+    <!-- ══════════════════════════════════════════════════
          MOT DU CEO
-    ═══════════════════════════════════════════ -->
-    <section class="section ceo">
+    ══════════════════════════════════════════════════ -->
+    <section class="ceo reveal-section">
       <div class="container">
-        <div class="ceo-layout reveal">
-          <div class="ceo-quote-block">
-            <span class="ceo-quote-mark" aria-hidden="true">"</span>
+        <div class="ceo-inner">
+          <div class="ceo-number mono reveal">01</div>
+          <div class="ceo-content reveal reveal--d1">
+            <p class="ceo-label mono">Mot du dirigeant</p>
             <blockquote class="ceo-quote">
-              Le BIM n'est pas une fin en soi — c'est un levier de performance,
-              de collaboration et de maîtrise. Notre mission est d'en faire
-              un atout concret pour chacun de nos clients, quel que soit
-              le projet, quelle que soit l'île.
+              Le BIM n'est pas une fin en soi —<br/>
+              c'est un <span class="highlight">levier de performance</span>,<br/>
+              de collaboration et de maîtrise.
             </blockquote>
-          </div>
-          <div class="ceo-identity">
-            <div class="ceo-avatar" aria-hidden="true">
-              <span class="ceo-avatar__initials">AP</span>
-            </div>
-            <div>
-              <p class="ceo-name">Arnaud PLASSARD</p>
-              <p class="ceo-title">Fondateur & Dirigeant — eBIM Ingénierie</p>
-              <p class="ceo-diploma">Mastère spécialisé BIM · ESTP / ENPC · Promo 2016</p>
+            <div class="ceo-identity">
+              <div class="ceo-avatar">AP</div>
+              <div>
+                <strong>Arnaud PLASSARD</strong>
+                <p>Fondateur · Mastère BIM ESTP/ENPC · Promo 2016</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════
+    <!-- ══════════════════════════════════════════════════
          MISSIONS BIM
-    ═══════════════════════════════════════════ -->
-    <section class="section missions" id="missions">
+    ══════════════════════════════════════════════════ -->
+    <section class="missions reveal-section" id="missions">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">Services</span>
+
+        <div class="section-head reveal">
+          <span class="mono section-index">02</span>
           <h2 class="section-title">Missions BIM</h2>
-          <p class="section-sub">Un accompagnement complet, de la programmation à l'exploitation.</p>
         </div>
 
-        <div class="missions-grid">
+        <div class="missions-list">
 
-          <!-- AMO BIM -->
-          <article class="mission-card reveal" data-index="0">
-            <div class="mission-card__number">01</div>
-            <div class="mission-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 32L20 8L32 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12 24H28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
+          <article class="mission reveal">
+            <div class="mission__meta">
+              <span class="mission__num mono">01</span>
+              <div class="mission__bar"></div>
             </div>
-            <h3 class="mission-card__title">AMO BIM</h3>
-            <p class="mission-card__desc">Accompagnement et encadrement des projets BIM pour la maîtrise d'ouvrage, de la programmation jusqu'à l'exploitation de la maquette numérique.</p>
-            <ul class="mission-card__list">
-              <li>Définition des objectifs et stratégie BIM</li>
-              <li>Rédaction cahier des charges & Charte BIM</li>
-              <li>Sélection des maîtrises d'œuvre</li>
-              <li>Contrôle de la maquette numérique</li>
-            </ul>
+            <div class="mission__content">
+              <h3 class="mission__title">AMO BIM</h3>
+              <p class="mission__desc">Accompagnement et encadrement des projets BIM pour la maîtrise d'ouvrage, de la programmation jusqu'à l'exploitation de la maquette numérique.</p>
+              <ul class="mission__list">
+                <li>Définition des objectifs et stratégie BIM</li>
+                <li>Rédaction cahier des charges &amp; Charte BIM</li>
+                <li>Sélection des maîtrises d'œuvre</li>
+                <li>Contrôle des maquettes numériques</li>
+              </ul>
+            </div>
           </article>
 
-          <!-- BIM Management -->
-          <article class="mission-card reveal" data-index="1">
-            <div class="mission-card__number">02</div>
-            <div class="mission-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="6" y="6" width="12" height="12" rx="1" stroke="currentColor" stroke-width="2"/>
-                <rect x="22" y="6" width="12" height="12" rx="1" stroke="currentColor" stroke-width="2"/>
-                <rect x="6" y="22" width="12" height="12" rx="1" stroke="currentColor" stroke-width="2"/>
-                <rect x="22" y="22" width="12" height="12" rx="1" stroke="currentColor" stroke-width="2"/>
-              </svg>
+          <article class="mission reveal reveal--d1">
+            <div class="mission__meta">
+              <span class="mission__num mono">02</span>
+              <div class="mission__bar"></div>
             </div>
-            <h3 class="mission-card__title">BIM Management</h3>
-            <p class="mission-card__desc">Organisation des méthodes et processus pour l'établissement et le suivi de la maquette numérique tout au long du projet.</p>
-            <ul class="mission-card__list">
-              <li>Rédaction de la Convention BIM</li>
-              <li>Gestion de la plateforme collaborative</li>
-              <li>Coordination des maquettes MOE & exécution</li>
-              <li>Garant de l'interopérabilité</li>
-            </ul>
+            <div class="mission__content">
+              <h3 class="mission__title">BIM Management</h3>
+              <p class="mission__desc">Organisation des méthodes et processus pour l'établissement et le suivi de la maquette numérique tout au long du projet.</p>
+              <ul class="mission__list">
+                <li>Rédaction de la Convention BIM</li>
+                <li>Gestion de la plateforme collaborative</li>
+                <li>Coordination MOE &amp; exécution</li>
+                <li>Garant de l'interopérabilité</li>
+              </ul>
+            </div>
           </article>
 
-          <!-- Synthèse numérique -->
-          <article class="mission-card reveal" data-index="2">
-            <div class="mission-card__number">03</div>
-            <div class="mission-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="2"/>
-                <path d="M20 7V20L28 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+          <article class="mission reveal reveal--d2">
+            <div class="mission__meta">
+              <span class="mission__num mono">03</span>
+              <div class="mission__bar"></div>
             </div>
-            <h3 class="mission-card__title">Synthèse numérique</h3>
-            <p class="mission-card__desc">Coordination des lots techniques et architecturaux sur maquettes numériques pour détecter les conflits et clashs entre lots.</p>
-            <ul class="mission-card__list">
-              <li>Plateforme d'échange de données BIM</li>
-              <li>Vérification des maquettes</li>
-              <li>Détection de collisions & rapports</li>
-            </ul>
+            <div class="mission__content">
+              <h3 class="mission__title">Synthèse numérique</h3>
+              <p class="mission__desc">Coordination des lots techniques et architecturaux sur maquettes numériques pour détecter les conflits entre lots.</p>
+              <ul class="mission__list">
+                <li>Plateforme d'échange de données BIM</li>
+                <li>Vérification des maquettes</li>
+                <li>Détection de collisions &amp; rapports</li>
+              </ul>
+            </div>
           </article>
 
-          <!-- Commissionnement -->
-          <article class="mission-card reveal" data-index="3">
-            <div class="mission-card__number">04</div>
-            <div class="mission-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 34L20 6L34 34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M10 26H30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="20" cy="20" r="3" fill="currentColor"/>
-              </svg>
+          <article class="mission reveal reveal--d3">
+            <div class="mission__meta">
+              <span class="mission__num mono">04</span>
+              <div class="mission__bar"></div>
             </div>
-            <h3 class="mission-card__title">Commissionnement</h3>
-            <p class="mission-card__desc">Processus de contrôle qualité structuré sur toutes les phases du projet, de la programmation à la livraison, pour garantir les performances énergétiques visées.</p>
+            <div class="mission__content">
+              <h3 class="mission__title">Commissionnement</h3>
+              <p class="mission__desc">Processus de contrôle qualité structuré sur toutes les phases du projet, de la programmation à la livraison, pour garantir les performances énergétiques visées.</p>
+            </div>
           </article>
 
         </div>
+
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════
+    <!-- ══════════════════════════════════════════════════
          MODÉLISATION DE L'EXISTANT
-    ═══════════════════════════════════════════ -->
-    <section class="section modelisation" id="modelisation">
+    ══════════════════════════════════════════════════ -->
+    <section class="modelisation reveal-section" id="modelisation">
       <div class="container">
-        <div class="modelisation-layout">
 
-          <div class="modelisation-text">
-            <div class="section-header section-header--left reveal">
-              <span class="section-tag">Expertise</span>
-              <h2 class="section-title">Modélisation<br/>de l'existant</h2>
-              <p class="section-sub">Remise en maquette numérique d'ouvrages existants à partir de plans ou de nuages de points.</p>
-            </div>
-            <ul class="modelisation-list reveal reveal--delay-1">
-              <li class="modelisation-item">
-                <span class="modelisation-item__dot"></span>
+        <div class="section-head reveal">
+          <span class="mono section-index">03</span>
+          <h2 class="section-title">Modélisation<br/>de l'existant</h2>
+        </div>
+
+        <div class="modelisation-grid">
+
+          <div class="modelisation-usages reveal reveal--d1">
+            <p class="label mono">Applications</p>
+            <ul class="usage-list">
+              <li class="usage-item">
+                <span class="usage-item__tag mono">01</span>
                 <div>
                   <strong>Réhabilitation / Rénovation</strong>
-                  <p>Maquette numérique pour piloter les travaux de rénovation.</p>
+                  <p>Maquette pour piloter les travaux de rénovation.</p>
                 </div>
               </li>
-              <li class="modelisation-item">
-                <span class="modelisation-item__dot"></span>
+              <li class="usage-item">
+                <span class="usage-item__tag mono">02</span>
                 <div>
                   <strong>Mise en exploitation</strong>
                   <p>Maquette telle que construite — DOE numérique.</p>
                 </div>
               </li>
-              <li class="modelisation-item">
-                <span class="modelisation-item__dot"></span>
+              <li class="usage-item">
+                <span class="usage-item__tag mono">03</span>
                 <div>
                   <strong>Communication</strong>
                   <p>Visite virtuelle et valorisation du patrimoine bâti.</p>
                 </div>
               </li>
-              <li class="modelisation-item">
-                <span class="modelisation-item__dot"></span>
+              <li class="usage-item">
+                <span class="usage-item__tag mono">04</span>
                 <div>
                   <strong>Gestion de chantier</strong>
                   <p>Planification et suivi de chantier sur maquette.</p>
@@ -232,181 +293,201 @@
             </ul>
           </div>
 
-          <div class="modelisation-refs reveal reveal--delay-2">
-            <h3 class="refs-title">Références</h3>
-            <div class="refs-list">
+          <div class="modelisation-refs reveal reveal--d2">
+            <p class="label mono">Références</p>
+            <div class="ref-list">
 
-              <div class="ref-card">
-                <div class="ref-card__label">Logement social</div>
-                <h4 class="ref-card__name">Opération "Victoria"</h4>
-                <p class="ref-card__detail">220 logements + 20 commerces — Saint-André</p>
-                <p class="ref-card__mo">MO : SHLMR / Action Logement</p>
+              <div class="ref">
+                <div class="ref__header">
+                  <span class="ref__cat mono">Logement social</span>
+                  <span class="ref__line"></span>
+                </div>
+                <h4 class="ref__name">Opération "Victoria"</h4>
+                <p class="ref__detail">220 logements + 20 commerces — Saint-André</p>
+                <p class="ref__mo mono">SHLMR / Action Logement</p>
               </div>
 
-              <div class="ref-card">
-                <div class="ref-card__label">Industrie</div>
-                <h4 class="ref-card__name">Opération "Danone" Le Port</h4>
-                <p class="ref-card__detail">Usine de production</p>
-                <p class="ref-card__mo">MO : Danone / Groupe GBH</p>
+              <div class="ref">
+                <div class="ref__header">
+                  <span class="ref__cat mono">Industrie</span>
+                  <span class="ref__line"></span>
+                </div>
+                <h4 class="ref__name">Opération "Danone" Le Port</h4>
+                <p class="ref__detail">Usine de production</p>
+                <p class="ref__mo mono">Danone / Groupe GBH</p>
               </div>
 
-              <div class="ref-card">
-                <div class="ref-card__label">Commerce</div>
-                <h4 class="ref-card__name">Carrefour Ste Clotilde</h4>
-                <p class="ref-card__detail">Centre commercial</p>
-                <p class="ref-card__mo">MO : FICASA / Groupe GBH</p>
+              <div class="ref">
+                <div class="ref__header">
+                  <span class="ref__cat mono">Commerce</span>
+                  <span class="ref__line"></span>
+                </div>
+                <h4 class="ref__name">Carrefour Ste Clotilde</h4>
+                <p class="ref__detail">Centre commercial</p>
+                <p class="ref__mo mono">FICASA / Groupe GBH</p>
               </div>
 
-              <div class="ref-card">
-                <div class="ref-card__label">Santé</div>
-                <h4 class="ref-card__name">CHU – Bloc opératoire</h4>
-                <p class="ref-card__detail">Bâtiment hospitalier — Saint-Denis</p>
-                <p class="ref-card__mo">MO : CHU Félix Guyon</p>
+              <div class="ref">
+                <div class="ref__header">
+                  <span class="ref__cat mono">Santé</span>
+                  <span class="ref__line"></span>
+                </div>
+                <h4 class="ref__name">CHU — Bloc opératoire</h4>
+                <p class="ref__detail">Bâtiment hospitalier — Saint-Denis</p>
+                <p class="ref__mo mono">CHU Félix Guyon</p>
               </div>
 
             </div>
           </div>
 
         </div>
+
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════
+    <!-- ══════════════════════════════════════════════════
          FORMATIONS BIM
-    ═══════════════════════════════════════════ -->
-    <section class="section formations" id="formations">
+    ══════════════════════════════════════════════════ -->
+    <section class="formations reveal-section" id="formations">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">Certifié Qualiopi</span>
+
+        <div class="section-head reveal">
+          <span class="mono section-index">04</span>
           <h2 class="section-title">Formations BIM</h2>
-          <p class="section-sub">Formations logiciels et processus BIM adaptées à tous les professionnels du bâtiment.<br/>Déclaration d'activité n° 04 97 31 52 497</p>
+          <p class="section-sub mono">Certifié Qualiopi · N° 04 97 31 52 497</p>
         </div>
 
-        <!-- Chiffres clés -->
-        <div class="stats-row reveal reveal--delay-1">
-          <div class="stat-item">
-            <span class="stat-value" data-target="94">0</span><span class="stat-unit">%</span>
-            <p class="stat-label">des objectifs atteints en fin de formation</p>
+        <!-- Stats formations -->
+        <div class="formations-stats reveal reveal--d1">
+          <div class="fstat">
+            <span class="fstat__num mono" data-target="94">0</span><span class="fstat__unit mono">%</span>
+            <p>objectifs atteints</p>
           </div>
-          <div class="stat-item">
-            <span class="stat-value" data-target="97">0</span><span class="stat-unit">%</span>
-            <p class="stat-label">des apprenants satisfaits</p>
+          <div class="fstat__sep" aria-hidden="true"></div>
+          <div class="fstat">
+            <span class="fstat__num mono" data-target="97">0</span><span class="fstat__unit mono">%</span>
+            <p>apprenants satisfaits</p>
           </div>
-          <div class="stat-item">
-            <span class="stat-value" data-target="97">0</span><span class="stat-unit">%</span>
-            <p class="stat-label">du programme adapté aux besoins</p>
+          <div class="fstat__sep" aria-hidden="true"></div>
+          <div class="fstat">
+            <span class="fstat__num mono" data-target="97">0</span><span class="fstat__unit mono">%</span>
+            <p>programme adapté</p>
           </div>
         </div>
 
-        <!-- Catalogue formations -->
-        <div class="formations-grid reveal reveal--delay-2">
+        <!-- Catalogue -->
+        <div class="formations-grid reveal reveal--d2">
 
-          <div class="formation-card">
-            <div class="formation-card__duration">35h</div>
-            <h4 class="formation-card__title">REVIT Initiation</h4>
-            <p class="formation-card__desc">Prise en main complète du logiciel Autodesk Revit pour les professionnels du bâtiment.</p>
+          <div class="formation">
+            <span class="formation__h mono">35h</span>
+            <h4>REVIT Initiation</h4>
+            <p>Prise en main complète du logiciel pour les professionnels du bâtiment.</p>
           </div>
 
-          <div class="formation-card">
-            <div class="formation-card__duration">21h</div>
-            <h4 class="formation-card__title">REVIT Perfectionnement MEP / Fluides</h4>
-            <p class="formation-card__desc">Maîtrise des fonctions avancées pour les corps d'état techniques.</p>
+          <div class="formation">
+            <span class="formation__h mono">21h</span>
+            <h4>REVIT MEP / Fluides</h4>
+            <p>Fonctions avancées pour les corps d'état techniques.</p>
           </div>
 
-          <div class="formation-card">
-            <div class="formation-card__duration">14h</div>
-            <h4 class="formation-card__title">REVIT – Travaux Collaboratifs BIM</h4>
-            <p class="formation-card__desc">Gestion du travail collaboratif et des modèles partagés sous Revit.</p>
+          <div class="formation">
+            <span class="formation__h mono">14h</span>
+            <h4>REVIT Collaboratif</h4>
+            <p>Travail collaboratif et modèles partagés sous Revit.</p>
           </div>
 
-          <div class="formation-card">
-            <div class="formation-card__duration">35h</div>
-            <h4 class="formation-card__title">ArchiCAD Initiation</h4>
-            <p class="formation-card__desc">Découverte et maîtrise du logiciel ArchiCAD pour les architectes et ingénieurs.</p>
+          <div class="formation">
+            <span class="formation__h mono">35h</span>
+            <h4>ArchiCAD Initiation</h4>
+            <p>Découverte et maîtrise d'ArchiCAD pour architectes et ingénieurs.</p>
           </div>
 
-          <div class="formation-card">
-            <div class="formation-card__duration">7h</div>
-            <h4 class="formation-card__title">Manipulation d'Outils BIM</h4>
-            <p class="formation-card__desc">Tour d'horizon des outils de la chaîne numérique BIM.</p>
+          <div class="formation">
+            <span class="formation__h mono">7h</span>
+            <h4>Outils BIM</h4>
+            <p>Tour d'horizon des outils de la chaîne numérique BIM.</p>
           </div>
 
-          <div class="formation-card">
-            <div class="formation-card__duration">14h</div>
-            <h4 class="formation-card__title">Gestion de projet BIM</h4>
-            <p class="formation-card__desc">Méthodologie et processus pour piloter un projet en BIM.</p>
+          <div class="formation">
+            <span class="formation__h mono">14h</span>
+            <h4>Gestion de projet BIM</h4>
+            <p>Méthodologie et processus pour piloter un projet en BIM.</p>
           </div>
 
-          <div class="formation-card formation-card--accent">
-            <div class="formation-card__duration">14h</div>
-            <h4 class="formation-card__title">Le BIM pour la Maîtrise d'Ouvrage</h4>
-            <p class="formation-card__desc">Formation dédiée aux donneurs d'ordre : comprendre et piloter le BIM sur ses projets.</p>
+          <div class="formation formation--featured">
+            <span class="formation__h mono">14h</span>
+            <h4>BIM pour la MOA</h4>
+            <p>Comprendre et piloter le BIM en tant que donneur d'ordre.</p>
           </div>
 
         </div>
+
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════
+    <!-- ══════════════════════════════════════════════════
          PARTENAIRES
-    ═══════════════════════════════════════════ -->
-    <section class="section partenaires">
+    ══════════════════════════════════════════════════ -->
+    <section class="partenaires reveal-section">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">Écosystème</span>
-          <h2 class="section-title">Partenaires</h2>
-        </div>
-        <div class="partenaires-grid reveal reveal--delay-1">
-          <div class="partenaire-card">
-            <h4 class="partenaire-card__name">Arcad Ingénierie</h4>
-            <p class="partenaire-card__desc">Acquisition et traitement de données 3D — scanner 3D</p>
+        <p class="label mono reveal">Partenaires</p>
+        <div class="partenaires-list reveal reveal--d1">
+          <div class="partenaire">
+            <strong>Arcad Ingénierie</strong>
+            <p>Acquisition et traitement de données 3D · scanner 3D</p>
           </div>
-          <div class="partenaire-card">
-            <h4 class="partenaire-card__name">Vibrason Production</h4>
-            <p class="partenaire-card__desc">Visite virtuelle et communication</p>
+          <div class="partenaire__sep" aria-hidden="true"></div>
+          <div class="partenaire">
+            <strong>Vibrason Production</strong>
+            <p>Visite virtuelle et communication</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════
+    <!-- ══════════════════════════════════════════════════
          CONTACT
-    ═══════════════════════════════════════════ -->
-    <section class="section contact" id="contact">
+    ══════════════════════════════════════════════════ -->
+    <section class="contact reveal-section" id="contact">
       <div class="container">
-        <div class="contact-layout">
 
-          <div class="contact-text reveal">
-            <span class="section-tag">Contact</span>
-            <h2 class="section-title">Parlons de<br/>votre projet</h2>
-            <p class="contact-intro">Arnaud PLASSARD<br/>Ingénieur BIM — Mastère spécialisé ESTP / ENPC, Promo 2016</p>
+        <div class="section-head reveal">
+          <span class="mono section-index">05</span>
+          <h2 class="section-title">Parlons de<br/>votre projet</h2>
+        </div>
+
+        <div class="contact-grid">
+
+          <div class="contact-info reveal reveal--d1">
+            <p class="contact-name">Arnaud PLASSARD</p>
+            <p class="contact-role mono">Ingénieur BIM · Fondateur</p>
             <div class="contact-zones">
-              <span class="zone-badge">La Réunion</span>
-              <span class="zone-badge">Mayotte</span>
-              <span class="zone-badge">Mozambique</span>
-              <span class="zone-badge">Afrique du Sud</span>
-              <span class="zone-badge">France métropolitaine</span>
+              <span>La Réunion</span>
+              <span>Mayotte</span>
+              <span>Mozambique</span>
+              <span>Afrique du Sud</span>
+              <span>France métropolitaine</span>
             </div>
           </div>
 
-          <form class="contact-form reveal reveal--delay-1" id="contact-form" novalidate>
+          <form class="contact-form reveal reveal--d2" id="contact-form" novalidate>
             <div class="form-row">
-              <div class="form-group">
-                <label for="nom" class="form-label">Nom *</label>
-                <input type="text" id="nom" name="nom" class="form-input" placeholder="Votre nom" required />
+              <div class="form-field">
+                <label for="nom">Nom *</label>
+                <input type="text" id="nom" name="nom" placeholder="Votre nom" required />
               </div>
-              <div class="form-group">
-                <label for="entreprise" class="form-label">Entreprise</label>
-                <input type="text" id="entreprise" name="entreprise" class="form-input" placeholder="Votre entreprise" />
+              <div class="form-field">
+                <label for="entreprise">Entreprise</label>
+                <input type="text" id="entreprise" name="entreprise" placeholder="Votre entreprise" />
               </div>
             </div>
-            <div class="form-group">
-              <label for="email" class="form-label">Email *</label>
-              <input type="email" id="email" name="email" class="form-input" placeholder="votre@email.com" required />
+            <div class="form-field">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" placeholder="votre@email.com" required />
             </div>
-            <div class="form-group">
-              <label for="sujet" class="form-label">Sujet</label>
-              <select id="sujet" name="sujet" class="form-input form-select">
+            <div class="form-field">
+              <label for="sujet">Sujet</label>
+              <select id="sujet" name="sujet">
                 <option value="">Sélectionnez un sujet</option>
                 <option value="amo">AMO BIM</option>
                 <option value="management">BIM Management</option>
@@ -415,38 +496,37 @@
                 <option value="autre">Autre</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="message" class="form-label">Message *</label>
-              <textarea id="message" name="message" class="form-input form-textarea" placeholder="Décrivez votre projet..." rows="5" required></textarea>
+            <div class="form-field">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" placeholder="Décrivez votre projet…" rows="5" required></textarea>
             </div>
-            <button type="submit" class="btn btn--primary btn--full">Envoyer le message</button>
+            <button type="submit" class="btn btn--orange btn--full">Envoyer le message</button>
             <p class="form-notice" id="form-notice" role="alert" aria-live="polite"></p>
           </form>
 
         </div>
+
       </div>
     </section>
 
   </main>
 
-  <!-- ═══════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════ -->
+  <!-- ── FOOTER ────────────────────────────────────────── -->
   <footer class="footer">
     <div class="container">
       <div class="footer-inner">
-        <div class="footer-brand">
+        <div>
           <img src="https://ebim-ing.re/images/ebim-logo.svg" alt="eBIM Ingénierie" class="footer-logo" />
-          <p class="footer-tagline">BIM Management · La Réunion</p>
+          <p class="footer-tag mono">BIM Management · La Réunion</p>
         </div>
         <nav class="footer-nav" aria-label="Navigation pied de page">
           <a href="#accueil">Accueil</a>
-          <a href="#missions">Missions BIM</a>
+          <a href="#missions">Missions</a>
           <a href="#modelisation">Modélisation</a>
-          <a href="#formations">Formations BIM</a>
+          <a href="#formations">Formations</a>
           <a href="#contact">Contact</a>
         </nav>
-        <p class="footer-copy">&copy; 2025 eBIM Ingénierie — Tous droits réservés</p>
+        <p class="footer-copy mono">&copy; 2025 eBIM Ingénierie</p>
       </div>
     </div>
   </footer>
