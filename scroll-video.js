@@ -7,6 +7,10 @@
 (function () {
   'use strict';
 
+  /* Empêcher le navigateur de restaurer la position de scroll au refresh */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
   var TOTAL_FRAMES = 121;
   var FRAME_PATH   = 'assets/videos/frames/frame-';
   var FRAME_EXT    = '.jpg';
