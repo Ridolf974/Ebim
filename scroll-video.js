@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════════
    eBIM Ingénierie — Arrière-plan vidéo piloté par le scroll
    · 6 frames JPEG en arrière-plan fixé
-   · Change de frame proportionnellement au scroll de la page
+   · Frame 1 en haut de page → Frame 6 au début de Missions BIM
    ══════════════════════════════════════════════════════════ */
 
 (function () {
@@ -12,7 +12,8 @@
   var FRAME_EXT    = '.jpg';
 
   var bg = document.getElementById('scroll-video-bg');
-  if (!bg) return;
+  var missions = document.getElementById('missions');
+  if (!bg || !missions) return;
 
   /* Construire les chemins et pré-charger */
   var srcs = [];
@@ -21,7 +22,6 @@
     while (num.length < 4) num = '0' + num;
     srcs.push(FRAME_PATH + num + FRAME_EXT);
 
-    /* Pré-charger l'image en mémoire */
     var preload = new Image();
     preload.src = srcs[i];
   }
@@ -29,13 +29,13 @@
   var currentIndex = 0;
 
   function update() {
-    var scrollTop   = window.pageYOffset || document.documentElement.scrollTop;
-    var scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+    /* Scroll de 0 (haut de page) jusqu'au haut de la section Missions */
+    var scrollTop  = window.pageYOffset || document.documentElement.scrollTop;
+    var endPoint   = missions.offsetTop;
 
-    /* Éviter division par zéro */
-    if (scrollTotal <= 0) return;
+    if (endPoint <= 0) return;
 
-    var progress = scrollTop / scrollTotal;
+    var progress = scrollTop / endPoint;
     progress = Math.max(0, Math.min(1, progress));
 
     var index = Math.min(Math.floor(progress * TOTAL_FRAMES), TOTAL_FRAMES - 1);
@@ -46,10 +46,7 @@
     }
   }
 
-  /* Écouter le scroll */
   window.addEventListener('scroll', update, { passive: true });
-
-  /* Premier rendu */
   update();
 
 })();
