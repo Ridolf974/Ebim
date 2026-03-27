@@ -1,56 +1,31 @@
 /* ══════════════════════════════════════════════════════════
-   eBIM Ingénierie — Script principal (Redesign)
-   · Curseur custom
+   eBIM Ingénierie — Script principal (Redesign Light Pro)
    · Navigation sticky + burger + lien actif
-   · Split reveal Hero
-   · Scroll reveal
-   · Compteurs animés
-   · Formulaire
+   · Scroll reveal (.reveal → .visible)
+   · Compteurs animés (trust-num + fstat__num)
+   · Formulaire de contact
    ══════════════════════════════════════════════════════════ */
 
 (function () {
   'use strict';
 
-  /* ── Curseur custom ──────────────────────────────────── */
-  const cursor   = document.getElementById('cursor');
-  const follower = document.getElementById('cursor-follower');
-  let mx = 0, my = 0, fx = 0, fy = 0;
-
-  if (cursor && follower) {
-    document.addEventListener('mousemove', function (e) {
-      mx = e.clientX;
-      my = e.clientY;
-      cursor.style.left = mx + 'px';
-      cursor.style.top  = my + 'px';
-    });
-
-    /* Le follower suit avec un léger retard */
-    (function animFollower() {
-      fx += (mx - fx) * 0.12;
-      fy += (my - fy) * 0.12;
-      follower.style.left = fx + 'px';
-      follower.style.top  = fy + 'px';
-      requestAnimationFrame(animFollower);
-    })();
-  }
-
   /* ── Navigation ──────────────────────────────────────── */
-  const nav    = document.getElementById('nav');
-  const burger = document.getElementById('nav-burger');
-  const links  = document.getElementById('nav-links');
-  const navLinks = document.querySelectorAll('.nav-link[data-section]');
+  const nav      = document.getElementById('nav');
+  const burger   = document.getElementById('nav-burger');
+  const navLinks = document.getElementById('nav-links');
+  const links    = document.querySelectorAll('.nav-link[data-section]');
   const sections = document.querySelectorAll('section[id]');
 
   function onScroll() {
     /* Fond nav au scroll */
     nav.classList.toggle('scrolled', window.scrollY > 60);
 
-    /* Lien actif */
+    /* Lien actif selon section visible */
     let current = '';
     sections.forEach(function (s) {
-      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      if (window.scrollY >= s.offsetTop - 140) current = s.id;
     });
-    navLinks.forEach(function (l) {
+    links.forEach(function (l) {
       l.classList.toggle('active', l.dataset.section === current);
     });
   }
@@ -58,36 +33,25 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* Burger */
-  burger.addEventListener('click', function () {
-    const open = links.classList.toggle('open');
-    burger.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', open);
-  });
-  links.querySelectorAll('.nav-link').forEach(function (l) {
-    l.addEventListener('click', function () {
-      links.classList.remove('open');
-      burger.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
+  /* Burger mobile */
+  if (burger) {
+    burger.addEventListener('click', function () {
+      const open = navLinks.classList.toggle('open');
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', String(open));
     });
-  });
 
-  /* ── Split reveal Hero ────────────────────────────────── */
-  /* Les éléments .split-reveal s'animent au chargement */
-  function initHeroReveal() {
-    document.querySelectorAll('.split-reveal').forEach(function (el) {
-      setTimeout(function () {
-        el.classList.add('visible');
-      }, 80);
+    /* Fermer le menu au clic sur un lien */
+    navLinks.querySelectorAll('.nav-link').forEach(function (l) {
+      l.addEventListener('click', function () {
+        navLinks.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+      });
     });
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeroReveal);
-  } else {
-    initHeroReveal();
-  }
 
-  /* ── Scroll reveal générique ──────────────────────────── */
+  /* ── Scroll reveal ────────────────────────────────────── */
   const reveals = document.querySelectorAll('.reveal');
 
   const revealObs = new IntersectionObserver(function (entries) {
@@ -102,10 +66,10 @@
   reveals.forEach(function (el) { revealObs.observe(el); });
 
   /* ── Compteurs animés ─────────────────────────────────── */
-  /* Tous les éléments avec data-target (hero + formations) */
-  const counters = document.querySelectorAll('[data-target]');
-
   function animCounter(el) {
+    if (el.dataset.animated) return;
+    el.dataset.animated = '1';
+
     const target = parseInt(el.dataset.target, 10);
     const dur    = 1600;
     const start  = performance.now();
@@ -115,39 +79,44 @@
       /* easeOutExpo */
       const e = 1 - Math.pow(2, -10 * p);
       el.textContent = Math.round(e * target);
-      if (p < 1) requestAnimationFrame(step);
-      else el.textContent = target;
+      if (p < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target;
+      }
     }
     requestAnimationFrame(step);
   }
 
-  const counterObs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        /* Anime tous les compteurs visibles dans la section */
-        entry.target.querySelectorAll('[data-target]').forEach(animCounter);
-        counterObs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.4 });
-
-  /* Lance les compteurs Hero au chargement */
-  const heroStats = document.querySelector('.hero-stats');
-  if (heroStats) {
+  /* Compteurs hero (.trust-num) — déclenchés au chargement après 500ms */
+  const heroTrust = document.querySelector('.hero-trust');
+  if (heroTrust) {
     setTimeout(function () {
-      heroStats.querySelectorAll('[data-target]').forEach(animCounter);
-    }, 700);
+      heroTrust.querySelectorAll('[data-target]').forEach(animCounter);
+    }, 500);
   }
 
-  /* Lance les compteurs formations au scroll */
-  const fStats = document.querySelector('.formations-stats');
-  if (fStats) counterObs.observe(fStats);
+  /* Compteurs formations (.fstat__num) — déclenchés au scroll */
+  const formationsStats = document.querySelector('.formations-stats');
+
+  if (formationsStats) {
+    const counterObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('[data-target]').forEach(animCounter);
+          counterObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    counterObs.observe(formationsStats);
+  }
 
   /* ── Formulaire de contact ────────────────────────────── */
   const form   = document.getElementById('contact-form');
   const notice = document.getElementById('form-notice');
 
-  if (form) {
+  if (form && notice) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
@@ -165,12 +134,12 @@
       }
 
       const btn = form.querySelector('[type="submit"]');
-      btn.disabled = true;
+      btn.disabled    = true;
       btn.textContent = 'Envoi…';
 
       setTimeout(function () {
         form.reset();
-        btn.disabled = false;
+        btn.disabled    = false;
         btn.textContent = 'Envoyer le message';
         showNotice('Message envoyé ! Nous vous répondrons rapidement.', 'success');
       }, 1200);
@@ -179,10 +148,10 @@
 
   function showNotice(msg, type) {
     notice.textContent = msg;
-    notice.className = 'form-notice ' + type;
+    notice.className   = 'form-notice ' + type;
     setTimeout(function () {
       notice.textContent = '';
-      notice.className = 'form-notice';
+      notice.className   = 'form-notice';
     }, 6000);
   }
 
