@@ -32,7 +32,10 @@
   /* Calculer le point final après chargement complet de la page
      (polices, images, etc. peuvent décaler la mise en page) */
   function calcEndPoint() {
-    endPoint = missions.offsetTop + missions.offsetHeight - window.innerHeight;
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var rect = missions.getBoundingClientRect();
+    /* Position absolue du bas de #missions moins la hauteur du viewport */
+    endPoint = rect.bottom + scrollTop - window.innerHeight;
   }
 
   window.addEventListener('load', calcEndPoint);
