@@ -33,9 +33,9 @@
 
     /* Calculer dynamiquement la position de Missions BIM
        (peut changer après le chargement des polices, images, etc.) */
-    /* La dernière frame doit apparaître quand Missions BIM
-       entre dans le viewport (bas de l'écran), pas quand on atteint son top */
-    var endPoint = missions.getBoundingClientRect().top + scrollTop - window.innerHeight;
+    /* La dernière frame apparaît au bas de la section Missions BIM */
+    var missionsBottom = missions.getBoundingClientRect().bottom + scrollTop;
+    var endPoint = missionsBottom - window.innerHeight;
 
     if (endPoint <= 0) return;
 
