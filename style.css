@@ -149,7 +149,8 @@ main, footer { position: relative; z-index: 1; }
   top: 0; left: 0; right: 0;
   z-index: 100;
   height: var(--nav-h);
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   transition: box-shadow 0.3s;
 }
@@ -202,7 +203,7 @@ main, footer { position: relative; z-index: 1; }
 ══════════════════════════════════════════════════════ */
 .hero {
   padding-top: var(--nav-h);
-  background: var(--bg);
+  background: transparent;
   overflow: hidden;
 }
 .hero-inner {
@@ -310,7 +311,7 @@ main, footer { position: relative; z-index: 1; }
 
 /* Bandeau services */
 .hero-services {
-  background: var(--bg-dark);
+  background: rgba(26, 35, 50, 0.85);
   padding: 1rem 0;
 }
 .services-strip {
@@ -344,7 +345,7 @@ main, footer { position: relative; z-index: 1; }
    CEO
 ══════════════════════════════════════════════════════ */
 .ceo {
-  background: var(--bg-alt);
+  background: rgba(244, 247, 250, 0.85);
   padding: clamp(3rem, 6vw, 5rem) 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
