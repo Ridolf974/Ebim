@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════════
    eBIM Ingénierie — Arrière-plan vidéo piloté par le scroll
-   · 61 frames JPEG en arrière-plan fixé
-   · Frame 1 en haut de page → Frame 61 au début de Missions BIM
+   · 121 frames JPEG en arrière-plan fixé
+   · Frame 1 en haut de page → Frame 121 au bas visible de Missions BIM
    ══════════════════════════════════════════════════════════ */
 
 (function () {
@@ -27,25 +27,24 @@
   }
 
   var currentIndex = 0;
-  var endPoint = 0;
 
-  /* Calculer le point final après chargement complet de la page
-     (polices, images, etc. peuvent décaler la mise en page) */
-  function calcEndPoint() {
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    var rect = missions.getBoundingClientRect();
-    /* Position absolue du bas de #missions moins la hauteur du viewport */
-    endPoint = rect.bottom + scrollTop - window.innerHeight;
+  /* Position absolue du bas de #missions (remonte les offsetParent) */
+  function getMissionsBottom() {
+    var top = 0;
+    var el = missions;
+    while (el) {
+      top += el.offsetTop || 0;
+      el = el.offsetParent;
+    }
+    return top + missions.offsetHeight;
   }
 
-  window.addEventListener('load', calcEndPoint);
-  /* Recalculer aussi au redimensionnement */
-  window.addEventListener('resize', calcEndPoint);
-
   function update() {
-    if (endPoint <= 0) return;
-
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    /* endPoint = scroll où le bas de #missions touche le bas du viewport */
+    var endPoint = getMissionsBottom() - window.innerHeight;
+    if (endPoint <= 0) return;
 
     var progress = scrollTop / endPoint;
     progress = Math.max(0, Math.min(1, progress));
@@ -59,7 +58,7 @@
   }
 
   window.addEventListener('scroll', update, { passive: true });
-  calcEndPoint();
+  window.addEventListener('load', update);
   update();
 
 })();
