@@ -27,17 +27,22 @@
   }
 
   var currentIndex = 0;
+  var endPoint = 0;
+
+  /* Calculer le point final après chargement complet de la page
+     (polices, images, etc. peuvent décaler la mise en page) */
+  function calcEndPoint() {
+    endPoint = missions.offsetTop + missions.offsetHeight;
+  }
+
+  window.addEventListener('load', calcEndPoint);
+  /* Recalculer aussi au redimensionnement */
+  window.addEventListener('resize', calcEndPoint);
 
   function update() {
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    /* Calculer dynamiquement la position de Missions BIM
-       (peut changer après le chargement des polices, images, etc.) */
-    /* La dernière frame apparaît au bas de la section Missions BIM */
-    var missionsBottom = missions.getBoundingClientRect().bottom + scrollTop;
-    var endPoint = missionsBottom - window.innerHeight;
-
     if (endPoint <= 0) return;
+
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
     var progress = scrollTop / endPoint;
     progress = Math.max(0, Math.min(1, progress));
@@ -51,6 +56,7 @@
   }
 
   window.addEventListener('scroll', update, { passive: true });
+  calcEndPoint();
   update();
 
 })();
