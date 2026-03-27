@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════════
    eBIM Ingénierie — Arrière-plan vidéo piloté par le scroll
-   · 30 frames JPEG en arrière-plan fixé
-   · Frame 1 en haut de page → Frame 30 au début de Missions BIM
+   · 61 frames JPEG en arrière-plan fixé
+   · Frame 1 en haut de page → Frame 61 au début de Missions BIM
    ══════════════════════════════════════════════════════════ */
 
 (function () {
@@ -29,16 +29,18 @@
   var currentIndex = 0;
 
   function update() {
-    /* Scroll de 0 (haut de page) jusqu'au haut de la section Missions */
-    var scrollTop  = window.pageYOffset || document.documentElement.scrollTop;
-    var endPoint   = missions.offsetTop;
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    /* Calculer dynamiquement la position de Missions BIM
+       (peut changer après le chargement des polices, images, etc.) */
+    var endPoint = missions.getBoundingClientRect().top + scrollTop;
 
     if (endPoint <= 0) return;
 
     var progress = scrollTop / endPoint;
     progress = Math.max(0, Math.min(1, progress));
 
-    var index = Math.min(Math.floor(progress * TOTAL_FRAMES), TOTAL_FRAMES - 1);
+    var index = Math.min(Math.round(progress * (TOTAL_FRAMES - 1)), TOTAL_FRAMES - 1);
 
     if (index !== currentIndex) {
       currentIndex = index;
