@@ -7,7 +7,7 @@
 (function () {
   'use strict';
 
-  var TOTAL_FRAMES = 61;
+  var TOTAL_FRAMES = 121;
   var FRAME_PATH   = 'assets/videos/frames/frame-';
   var FRAME_EXT    = '.jpg';
 
