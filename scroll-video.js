@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════════════════
    eBIM Ingénierie — Animation vidéo pilotée par le scroll
-   · Extraction des frames d'une vidéo dans un tableau
+   · Chargement des frames pré-extraites (images JPEG)
    · Rendu image par image sur un <canvas> visible
    · Synchronisation linéaire avec la position de scroll
    · Optimisation via IntersectionObserver + requestAnimationFrame
@@ -10,19 +10,14 @@
   'use strict';
 
   /* ── Configuration ──────────────────────────────────── */
-  var CONFIG = {
-    videoSrc: 'assets/videos/scroll-video.mp4',
-    /* Nombre de frames à extraire — réduit sur mobile pour économiser la mémoire */
-    totalFrames: window.innerWidth < 768 ? 80 : 150,
-    canvasId: 'scroll-video-canvas',
-    sectionId: 'scroll-video',
-    loaderId: 'scroll-video-loader',
-  };
+  var TOTAL_FRAMES = 61;
+  var FRAME_PATH   = 'assets/videos/frames/frame-';
+  var FRAME_EXT    = '.jpg';
 
   /* ── Références DOM ─────────────────────────────────── */
-  var canvas  = document.getElementById(CONFIG.canvasId);
-  var section = document.getElementById(CONFIG.sectionId);
-  var loader  = document.getElementById(CONFIG.loaderId);
+  var canvas  = document.getElementById('scroll-video-canvas');
+  var section = document.getElementById('scroll-video');
+  var loader  = document.getElementById('scroll-video-loader');
 
   /* Ne rien faire si la section n'existe pas dans le DOM */
   if (!canvas || !section) return;
@@ -30,101 +25,83 @@
   var ctx = canvas.getContext('2d');
 
   /* ── État interne ───────────────────────────────────── */
-  var state = {
-    frames: [],          // Tableau de ImageBitmap ou HTMLCanvasElement
-    isLoaded: false,     // Frames extraites ?
-    isVisible: false,    // Section visible dans le viewport ?
-    currentFrame: -1,    // Dernière frame affichée (éviter les rendus redondants)
-    rafId: null,         // ID du requestAnimationFrame en cours
-  };
+  var frames       = [];       // Tableau d'objets Image chargés
+  var loadedCount  = 0;        // Nombre de frames chargées
+  var isReady      = false;    // Toutes les frames sont chargées ?
+  var isVisible    = false;    // Section visible dans le viewport ?
+  var currentFrame = -1;       // Dernière frame affichée
+  var rafId        = null;     // ID du requestAnimationFrame en cours
 
-  /* ── Extraction des frames ──────────────────────────── */
-  /* Crée un élément <video> hors-écran, parcourt la vidéo
-     par seek séquentiel et capture chaque frame. */
-  async function extractFrames() {
-    var video = document.createElement('video');
-    video.src = CONFIG.videoSrc;
-    video.muted = true;
-    video.playsInline = true;
-    video.preload = 'auto';
-    /* Nécessaire pour le seek sur certains navigateurs */
-    video.crossOrigin = 'anonymous';
+  /* ── Génération du chemin d'une frame ───────────────── */
+  /* Les fichiers sont nommés frame-0001.jpg, frame-0002.jpg, etc. */
+  function frameSrc(index) {
+    var num = String(index + 1);
+    while (num.length < 4) num = '0' + num;
+    return FRAME_PATH + num + FRAME_EXT;
+  }
 
-    /* Attendre le chargement des métadonnées (durée, dimensions) */
-    await new Promise(function (resolve, reject) {
-      video.addEventListener('loadedmetadata', resolve, { once: true });
-      video.addEventListener('error', function () {
-        reject(new Error('Impossible de charger la vidéo : ' + CONFIG.videoSrc));
-      }, { once: true });
-    });
+  /* ── Chargement de toutes les frames ────────────────── */
+  function loadFrames() {
+    for (var i = 0; i < TOTAL_FRAMES; i++) {
+      var img = new Image();
+      img.src = frameSrc(i);
 
-    /* Dimensionner le canvas selon la résolution native de la vidéo */
-    canvas.width  = video.videoWidth;
-    canvas.height = video.videoHeight;
+      /* Callback au chargement de chaque image */
+      img.onload = function () {
+        loadedCount++;
 
-    var interval = video.duration / (CONFIG.totalFrames - 1);
+        /* Dimensionner le canvas avec la première image chargée */
+        if (loadedCount === 1) {
+          canvas.width  = frames[0].naturalWidth;
+          canvas.height = frames[0].naturalHeight;
+          renderFrame(0);
+        }
 
-    /* Boucle séquentielle : seek → capture → stockage */
-    for (var i = 0; i < CONFIG.totalFrames; i++) {
-      video.currentTime = i * interval;
+        /* Toutes les frames sont prêtes */
+        if (loadedCount === TOTAL_FRAMES) {
+          isReady = true;
+          if (loader) loader.style.display = 'none';
+          onScroll();
+        }
+      };
 
-      /* Attendre que le seek soit terminé */
-      await new Promise(function (r) {
-        video.addEventListener('seeked', r, { once: true });
-      });
+      img.onerror = function () {
+        loadedCount++;
+        if (loadedCount === TOTAL_FRAMES) {
+          isReady = true;
+          if (loader) loader.style.display = 'none';
+        }
+      };
 
-      /* Dessiner la frame courante sur un canvas hors-écran */
-      var offscreen    = document.createElement('canvas');
-      offscreen.width  = video.videoWidth;
-      offscreen.height = video.videoHeight;
-      var offCtx = offscreen.getContext('2d');
-      offCtx.drawImage(video, 0, 0);
-
-      /* Stocker comme ImageBitmap si disponible (plus performant),
-         sinon conserver le canvas hors-écran directement */
-      if (typeof createImageBitmap === 'function') {
-        state.frames.push(await createImageBitmap(offscreen));
-      } else {
-        state.frames.push(offscreen);
-      }
+      frames.push(img);
     }
-
-    /* Chargement terminé */
-    state.isLoaded = true;
-
-    /* Masquer l'indicateur de chargement */
-    if (loader) {
-      loader.style.display = 'none';
-    }
-
-    /* Afficher la première frame */
-    renderFrame(0);
   }
 
   /* ── Rendu d'une frame sur le canvas visible ────────── */
   function renderFrame(index) {
     /* Borner l'index dans les limites du tableau */
-    index = Math.max(0, Math.min(index, state.frames.length - 1));
+    index = Math.max(0, Math.min(index, frames.length - 1));
 
     /* Éviter de redessiner la même frame */
-    if (index === state.currentFrame) return;
-    state.currentFrame = index;
+    if (index === currentFrame) return;
 
+    /* Vérifier que l'image est bien chargée */
+    if (!frames[index] || !frames[index].complete) return;
+
+    currentFrame = index;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(state.frames[index], 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(frames[index], 0, 0, canvas.width, canvas.height);
   }
 
   /* ── Gestion du scroll ──────────────────────────────── */
-  /* Calcule la progression du scroll dans la section
-     et détermine la frame correspondante. */
   function onScroll() {
-    if (!state.isLoaded || !state.isVisible) return;
+    if (!isReady || !isVisible) return;
 
     /* Éviter les appels multiples par frame d'animation */
-    if (state.rafId) return;
+    if (rafId) return;
 
-    state.rafId = requestAnimationFrame(function () {
-      state.rafId = null;
+    rafId = requestAnimationFrame(function () {
+      rafId = null;
 
       var rect = section.getBoundingClientRect();
       /* Hauteur de scroll exploitable : hauteur totale - viewport */
@@ -135,21 +112,19 @@
       var scrolled = -rect.top;
       var progress = Math.max(0, Math.min(1, scrolled / sectionHeight));
 
-      var frameIndex = Math.round(progress * (state.frames.length - 1));
+      var frameIndex = Math.round(progress * (frames.length - 1));
       renderFrame(frameIndex);
     });
   }
 
   /* ── IntersectionObserver pour la performance ────────── */
-  /* N'écouter le scroll que lorsque la section est visible
-     (ou sur le point de l'être grâce au rootMargin). */
   var visibilityObs = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
-      state.isVisible = entry.isIntersecting;
+      isVisible = entry.isIntersecting;
 
       if (entry.isIntersecting) {
         window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll(); // Rendu immédiat
+        onScroll();
       } else {
         window.removeEventListener('scroll', onScroll);
       }
@@ -158,13 +133,7 @@
 
   visibilityObs.observe(section);
 
-  /* ── Lancement de l'extraction ──────────────────────── */
-  extractFrames().catch(function (err) {
-    console.warn('[scroll-video] Erreur lors du chargement :', err);
-    /* En cas d'erreur, masquer le loader pour ne pas bloquer visuellement */
-    if (loader) {
-      loader.style.display = 'none';
-    }
-  });
+  /* ── Lancement du chargement ────────────────────────── */
+  loadFrames();
 
 })();
