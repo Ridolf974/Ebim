@@ -7,14 +7,10 @@
   <meta name="description" content="Bureau d'études réunionnais spécialisé en BIM Management. AMO BIM, Modélisation de l'existant, Commissionnement, Formations BIM." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- ── CURSEUR CUSTOM ───────────────────────────────── -->
-  <div class="cursor" id="cursor" aria-hidden="true"></div>
-  <div class="cursor-follower" id="cursor-follower" aria-hidden="true"></div>
 
   <!-- ── NAVIGATION ───────────────────────────────────── -->
   <header class="nav" id="nav">
@@ -24,13 +20,13 @@
       </a>
       <nav class="nav-links" id="nav-links" aria-label="Navigation principale">
         <a href="#accueil"      class="nav-link" data-section="accueil">Accueil</a>
-        <a href="#missions"     class="nav-link" data-section="missions">Missions</a>
+        <a href="#missions"     class="nav-link" data-section="missions">Missions BIM</a>
         <a href="#modelisation" class="nav-link" data-section="modelisation">Modélisation</a>
         <a href="#formations"   class="nav-link" data-section="formations">Formations</a>
         <a href="#contact"      class="nav-link nav-link--cta" data-section="contact">Contact</a>
       </nav>
       <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
@@ -41,104 +37,119 @@
          HERO
     ══════════════════════════════════════════════════ -->
     <section class="hero" id="accueil">
-
-      <!-- Grain de fond -->
-      <div class="hero-grain" aria-hidden="true"></div>
-
-      <!-- Ligne décorative diagonale -->
-      <div class="hero-diag" aria-hidden="true"></div>
-
       <div class="hero-inner">
 
-        <div class="hero-left">
-          <p class="hero-pretitle split-reveal">
-            <span class="mono">La Réunion · Océan Indien · Métropole</span>
-          </p>
+        <div class="hero-content">
+          <div class="hero-badge reveal">
+            <span class="badge-dot"></span>
+            La Réunion · Océan Indien · Métropole
+          </div>
 
-          <h1 class="hero-title">
-            <span class="hero-title__row split-reveal">
-              <span class="hero-title__word">BIM</span>
-            </span>
-            <span class="hero-title__row split-reveal split-reveal--d1">
-              <span class="hero-title__word hero-title__word--outline">Manage</span><span class="hero-title__word hero-title__accent">ment</span>
-            </span>
-            <span class="hero-title__row split-reveal split-reveal--d2">
-              <span class="hero-title__word">&amp; Ingénierie</span>
-            </span>
+          <h1 class="hero-title reveal reveal--d1">
+            BIM Management<br/>
+            <span class="hero-title__accent">&amp; Ingénierie</span>
           </h1>
 
-          <p class="hero-desc split-reveal split-reveal--d3">
+          <p class="hero-desc reveal reveal--d2">
             Bureau d'études spécialisé dans le <em>Building Information Modeling</em> —
             AMO BIM, Modélisation de l'existant, Commissionnement, Formation.
           </p>
 
-          <div class="hero-actions split-reveal split-reveal--d4">
-            <a href="#missions" class="btn btn--orange">Nos missions</a>
-            <a href="#contact"  class="btn btn--ghost">Nous contacter <span class="btn__arrow">→</span></a>
+          <div class="hero-actions reveal reveal--d3">
+            <a href="#missions" class="btn btn--green">Découvrir nos missions</a>
+            <a href="#contact"  class="btn btn--outline">Nous contacter</a>
+          </div>
+
+          <!-- Indicateurs de confiance -->
+          <div class="hero-trust reveal reveal--d4">
+            <div class="trust-item">
+              <strong class="trust-num" data-target="94">0</strong><span>%</span>
+              <p>objectifs atteints</p>
+            </div>
+            <div class="trust-sep"></div>
+            <div class="trust-item">
+              <strong class="trust-num" data-target="97">0</strong><span>%</span>
+              <p>apprenants satisfaits</p>
+            </div>
+            <div class="trust-sep"></div>
+            <div class="trust-item">
+              <strong class="trust-num" data-target="4">0</strong><span>+</span>
+              <p>références majeures</p>
+            </div>
           </div>
         </div>
 
-        <div class="hero-right" aria-hidden="true">
-          <div class="hero-stats">
-            <div class="hero-stat">
-              <span class="hero-stat__num mono" data-target="94">0</span><span class="hero-stat__unit mono">%</span>
-              <p class="hero-stat__label">objectifs atteints en formation</p>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat__num mono" data-target="97">0</span><span class="hero-stat__unit mono">%</span>
-              <p class="hero-stat__label">apprenants satisfaits</p>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat__num mono" data-target="4">0</span><span class="hero-stat__unit mono">+</span>
-              <p class="hero-stat__label">références majeures</p>
+        <!-- Visuel BIM -->
+        <div class="hero-visual reveal reveal--d2" aria-hidden="true">
+          <div class="hero-visual__card">
+            <svg class="bim-svg" viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Plan de fond -->
+              <rect x="20" y="20" width="440" height="320" fill="#F0F4F8" rx="4"/>
+              <!-- Lignes de plan -->
+              <line x1="20" y1="100" x2="460" y2="100" stroke="#CBD5E1" stroke-width="0.8"/>
+              <line x1="20" y1="180" x2="460" y2="180" stroke="#CBD5E1" stroke-width="0.8"/>
+              <line x1="20" y1="260" x2="460" y2="260" stroke="#CBD5E1" stroke-width="0.8"/>
+              <line x1="120" y1="20" x2="120" y2="340" stroke="#CBD5E1" stroke-width="0.8"/>
+              <line x1="240" y1="20" x2="240" y2="340" stroke="#CBD5E1" stroke-width="0.8"/>
+              <line x1="360" y1="20" x2="360" y2="340" stroke="#CBD5E1" stroke-width="0.8"/>
+              <!-- Bâtiment 3D isométrique -->
+              <!-- Face avant -->
+              <polygon points="140,280 300,280 300,180 140,180" fill="#E2EAF0" stroke="#94A3B8" stroke-width="1.5"/>
+              <!-- Face dessus -->
+              <polygon points="140,180 300,180 340,140 180,140" fill="#CBD5E1" stroke="#94A3B8" stroke-width="1.5"/>
+              <!-- Face droite -->
+              <polygon points="300,280 340,240 340,140 300,180" fill="#B0BEC5" stroke="#94A3B8" stroke-width="1.5"/>
+              <!-- Surbrillance verte (lot sélectionné) -->
+              <polygon points="180,260 260,260 260,200 180,200" fill="#5CB814" opacity="0.85" stroke="#4AA010" stroke-width="1.5"/>
+              <polygon points="180,200 260,200 300,162 220,162" fill="#6DD620" opacity="0.75" stroke="#4AA010" stroke-width="1.5"/>
+              <polygon points="260,260 300,222 300,162 260,200" fill="#4AA010" opacity="0.85" stroke="#3A8A0A" stroke-width="1.5"/>
+              <!-- Fenêtres face avant -->
+              <rect x="150" y="210" width="22" height="28" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1" rx="1"/>
+              <rect x="186" y="210" width="22" height="28" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1" rx="1"/>
+              <rect x="222" y="210" width="22" height="28" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1" rx="1"/>
+              <rect x="266" y="210" width="22" height="28" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1" rx="1"/>
+              <!-- Annotation BIM -->
+              <rect x="330" y="60" width="110" height="52" fill="#FFFFFF" stroke="#5CB814" stroke-width="1.5" rx="4"/>
+              <text x="342" y="80" font-family="monospace" font-size="9" fill="#5CB814" font-weight="bold">LOT SÉLECTIONNÉ</text>
+              <text x="342" y="96" font-family="monospace" font-size="8" fill="#64748B">Logement R+2</text>
+              <text x="342" y="107" font-family="monospace" font-size="8" fill="#64748B">Surface: 850 m²</text>
+              <line x1="330" y1="86" x2="300" y2="200" stroke="#5CB814" stroke-width="1" stroke-dasharray="4,3"/>
+              <circle cx="300" cy="200" r="3" fill="#5CB814"/>
+              <!-- Labels axes -->
+              <text x="26" y="95" font-family="monospace" font-size="8" fill="#94A3B8">A</text>
+              <text x="26" y="175" font-family="monospace" font-size="8" fill="#94A3B8">B</text>
+              <text x="26" y="255" font-family="monospace" font-size="8" fill="#94A3B8">C</text>
+              <text x="115" y="350" font-family="monospace" font-size="8" fill="#94A3B8">1</text>
+              <text x="235" y="350" font-family="monospace" font-size="8" fill="#94A3B8">2</text>
+              <text x="355" y="350" font-family="monospace" font-size="8" fill="#94A3B8">3</text>
+            </svg>
+            <div class="hero-visual__tag">
+              <span class="tag-dot"></span>
+              Maquette numérique BIM
             </div>
           </div>
-          <!-- SVG décoratif — wireframe bâtiment -->
-          <svg class="hero-wireframe" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="80" y="200" width="240" height="160" stroke="currentColor" stroke-width="0.8" opacity="0.25"/>
-            <rect x="120" y="120" width="160" height="80" stroke="currentColor" stroke-width="0.8" opacity="0.2"/>
-            <rect x="160" y="60" width="80" height="60" stroke="currentColor" stroke-width="0.8" opacity="0.15"/>
-            <line x1="80" y1="200" x2="160" y2="120" stroke="currentColor" stroke-width="0.6" opacity="0.2"/>
-            <line x1="320" y1="200" x2="280" y2="120" stroke="currentColor" stroke-width="0.6" opacity="0.2"/>
-            <line x1="120" y1="120" x2="160" y2="60" stroke="currentColor" stroke-width="0.6" opacity="0.15"/>
-            <line x1="280" y1="120" x2="240" y2="60" stroke="currentColor" stroke-width="0.6" opacity="0.15"/>
-            <!-- fenêtres -->
-            <rect x="100" y="240" width="30" height="40" stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
-            <rect x="150" y="240" width="30" height="40" stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
-            <rect x="200" y="240" width="30" height="40" stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
-            <rect x="250" y="240" width="30" height="40" stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
-            <rect x="140" y="140" width="25" height="25" stroke="currentColor" stroke-width="0.6" opacity="0.2"/>
-            <rect x="180" y="140" width="25" height="25" stroke="currentColor" stroke-width="0.6" opacity="0.2"/>
-            <rect x="220" y="140" width="25" height="25" stroke="currentColor" stroke-width="0.6" opacity="0.2"/>
-            <!-- grille de fond -->
-            <line x1="0" y1="100" x2="400" y2="100" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
-            <line x1="0" y1="200" x2="400" y2="200" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
-            <line x1="0" y1="300" x2="400" y2="300" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
-            <line x1="100" y1="0" x2="100" y2="400" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
-            <line x1="200" y1="0" x2="200" y2="400" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
-            <line x1="300" y1="0" x2="300" y2="400" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
-          </svg>
         </div>
 
       </div>
 
-      <div class="hero-ticker" aria-hidden="true">
-        <div class="hero-ticker__inner">
-          <span>AMO BIM</span><span class="sep">·</span>
-          <span>BIM Management</span><span class="sep">·</span>
-          <span>Synthèse numérique</span><span class="sep">·</span>
-          <span>Modélisation de l'existant</span><span class="sep">·</span>
-          <span>Commissionnement</span><span class="sep">·</span>
-          <span>Formations BIM</span><span class="sep">·</span>
-          <span>AMO BIM</span><span class="sep">·</span>
-          <span>BIM Management</span><span class="sep">·</span>
-          <span>Synthèse numérique</span><span class="sep">·</span>
-          <span>Modélisation de l'existant</span><span class="sep">·</span>
-          <span>Commissionnement</span><span class="sep">·</span>
-          <span>Formations BIM</span><span class="sep">·</span>
+      <!-- Bandeau services -->
+      <div class="hero-services reveal">
+        <div class="container">
+          <div class="services-strip">
+            <span>AMO BIM</span>
+            <span class="strip-sep">·</span>
+            <span>BIM Management</span>
+            <span class="strip-sep">·</span>
+            <span>Synthèse numérique</span>
+            <span class="strip-sep">·</span>
+            <span>Modélisation de l'existant</span>
+            <span class="strip-sep">·</span>
+            <span>Commissionnement</span>
+            <span class="strip-sep">·</span>
+            <span>Formations BIM</span>
+          </div>
         </div>
       </div>
-
     </section>
 
     <!-- ══════════════════════════════════════════════════
@@ -147,20 +158,20 @@
     <section class="ceo reveal-section">
       <div class="container">
         <div class="ceo-inner">
-          <div class="ceo-number mono reveal">01</div>
-          <div class="ceo-content reveal reveal--d1">
-            <p class="ceo-label mono">Mot du dirigeant</p>
+          <div class="ceo-quote-wrap reveal">
+            <div class="ceo-quote-icon" aria-hidden="true">"</div>
             <blockquote class="ceo-quote">
-              Le BIM n'est pas une fin en soi —<br/>
-              c'est un <span class="highlight">levier de performance</span>,<br/>
-              de collaboration et de maîtrise.
+              Le BIM n'est pas une fin en soi — c'est un levier de
+              <strong>performance, de collaboration et de maîtrise</strong>.
+              Notre mission est d'en faire un atout concret pour chacun de nos clients.
             </blockquote>
-            <div class="ceo-identity">
-              <div class="ceo-avatar">AP</div>
-              <div>
-                <strong>Arnaud PLASSARD</strong>
-                <p>Fondateur · Mastère BIM ESTP/ENPC · Promo 2016</p>
-              </div>
+          </div>
+          <div class="ceo-identity reveal reveal--d1">
+            <div class="ceo-avatar">AP</div>
+            <div class="ceo-info">
+              <strong>Arnaud PLASSARD</strong>
+              <p>Fondateur &amp; Dirigeant</p>
+              <p class="ceo-diploma">Mastère BIM · ESTP / ENPC · Promo 2016</p>
             </div>
           </div>
         </div>
@@ -170,275 +181,234 @@
     <!-- ══════════════════════════════════════════════════
          MISSIONS BIM
     ══════════════════════════════════════════════════ -->
-    <section class="missions reveal-section" id="missions">
+    <section class="section missions" id="missions">
       <div class="container">
-
         <div class="section-head reveal">
-          <span class="mono section-index">02</span>
-          <h2 class="section-title">Missions BIM</h2>
+          <div>
+            <p class="section-tag">Services</p>
+            <h2 class="section-title">Missions BIM</h2>
+          </div>
+          <p class="section-desc">Un accompagnement complet, de la programmation à l'exploitation.</p>
         </div>
 
-        <div class="missions-list">
+        <div class="missions-grid">
 
-          <article class="mission reveal">
-            <div class="mission__meta">
-              <span class="mission__num mono">01</span>
-              <div class="mission__bar"></div>
+          <article class="mission-card reveal">
+            <div class="mission-card__top">
+              <span class="mission-card__num">01</span>
+              <div class="mission-card__icon">
+                <svg viewBox="0 0 32 32" fill="none"><path d="M4 26L16 6l12 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 20H24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
             </div>
-            <div class="mission__content">
-              <h3 class="mission__title">AMO BIM</h3>
-              <p class="mission__desc">Accompagnement et encadrement des projets BIM pour la maîtrise d'ouvrage, de la programmation jusqu'à l'exploitation de la maquette numérique.</p>
-              <ul class="mission__list">
-                <li>Définition des objectifs et stratégie BIM</li>
-                <li>Rédaction cahier des charges &amp; Charte BIM</li>
-                <li>Sélection des maîtrises d'œuvre</li>
-                <li>Contrôle des maquettes numériques</li>
-              </ul>
-            </div>
+            <h3>AMO BIM</h3>
+            <p>Accompagnement de la maîtrise d'ouvrage de la programmation jusqu'à l'exploitation de la maquette numérique.</p>
+            <ul>
+              <li>Définition des objectifs et stratégie BIM</li>
+              <li>Rédaction cahier des charges &amp; Charte BIM</li>
+              <li>Sélection des maîtrises d'œuvre</li>
+              <li>Contrôle des maquettes numériques</li>
+            </ul>
           </article>
 
-          <article class="mission reveal reveal--d1">
-            <div class="mission__meta">
-              <span class="mission__num mono">02</span>
-              <div class="mission__bar"></div>
+          <article class="mission-card reveal reveal--d1">
+            <div class="mission-card__top">
+              <span class="mission-card__num">02</span>
+              <div class="mission-card__icon">
+                <svg viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="10" height="10" rx="1" stroke="currentColor" stroke-width="2"/><rect x="18" y="4" width="10" height="10" rx="1" stroke="currentColor" stroke-width="2"/><rect x="4" y="18" width="10" height="10" rx="1" stroke="currentColor" stroke-width="2"/><rect x="18" y="18" width="10" height="10" rx="1" stroke="currentColor" stroke-width="2"/></svg>
+              </div>
             </div>
-            <div class="mission__content">
-              <h3 class="mission__title">BIM Management</h3>
-              <p class="mission__desc">Organisation des méthodes et processus pour l'établissement et le suivi de la maquette numérique tout au long du projet.</p>
-              <ul class="mission__list">
-                <li>Rédaction de la Convention BIM</li>
-                <li>Gestion de la plateforme collaborative</li>
-                <li>Coordination MOE &amp; exécution</li>
-                <li>Garant de l'interopérabilité</li>
-              </ul>
-            </div>
+            <h3>BIM Management</h3>
+            <p>Organisation des méthodes et processus pour l'établissement et le suivi de la maquette numérique.</p>
+            <ul>
+              <li>Rédaction de la Convention BIM</li>
+              <li>Gestion de la plateforme collaborative</li>
+              <li>Coordination MOE &amp; exécution</li>
+              <li>Garant de l'interopérabilité</li>
+            </ul>
           </article>
 
-          <article class="mission reveal reveal--d2">
-            <div class="mission__meta">
-              <span class="mission__num mono">03</span>
-              <div class="mission__bar"></div>
+          <article class="mission-card reveal reveal--d2">
+            <div class="mission-card__top">
+              <span class="mission-card__num">03</span>
+              <div class="mission-card__icon">
+                <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="2"/><path d="M16 5v11l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
             </div>
-            <div class="mission__content">
-              <h3 class="mission__title">Synthèse numérique</h3>
-              <p class="mission__desc">Coordination des lots techniques et architecturaux sur maquettes numériques pour détecter les conflits entre lots.</p>
-              <ul class="mission__list">
-                <li>Plateforme d'échange de données BIM</li>
-                <li>Vérification des maquettes</li>
-                <li>Détection de collisions &amp; rapports</li>
-              </ul>
-            </div>
+            <h3>Synthèse numérique</h3>
+            <p>Coordination des lots sur maquettes numériques pour détecter les conflits entre corps d'état.</p>
+            <ul>
+              <li>Plateforme d'échange de données BIM</li>
+              <li>Vérification des maquettes</li>
+              <li>Détection de collisions &amp; rapports</li>
+            </ul>
           </article>
 
-          <article class="mission reveal reveal--d3">
-            <div class="mission__meta">
-              <span class="mission__num mono">04</span>
-              <div class="mission__bar"></div>
+          <article class="mission-card reveal reveal--d3">
+            <div class="mission-card__top">
+              <span class="mission-card__num">04</span>
+              <div class="mission-card__icon">
+                <svg viewBox="0 0 32 32" fill="none"><path d="M16 3l1.8 5.4H23l-4.4 3.2 1.7 5.4L16 14l-4.3 3 1.7-5.4L9 8.4h5.2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M6 22h20M6 27h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
             </div>
-            <div class="mission__content">
-              <h3 class="mission__title">Commissionnement</h3>
-              <p class="mission__desc">Processus de contrôle qualité structuré sur toutes les phases du projet, de la programmation à la livraison, pour garantir les performances énergétiques visées.</p>
-            </div>
+            <h3>Commissionnement</h3>
+            <p>Processus de contrôle qualité structuré sur toutes les phases du projet pour garantir les performances énergétiques visées.</p>
           </article>
 
         </div>
-
       </div>
     </section>
 
     <!-- ══════════════════════════════════════════════════
          MODÉLISATION DE L'EXISTANT
     ══════════════════════════════════════════════════ -->
-    <section class="modelisation reveal-section" id="modelisation">
+    <section class="section modelisation" id="modelisation">
       <div class="container">
+        <div class="modelisation-layout">
 
-        <div class="section-head reveal">
-          <span class="mono section-index">03</span>
-          <h2 class="section-title">Modélisation<br/>de l'existant</h2>
-        </div>
-
-        <div class="modelisation-grid">
-
-          <div class="modelisation-usages reveal reveal--d1">
-            <p class="label mono">Applications</p>
-            <ul class="usage-list">
-              <li class="usage-item">
-                <span class="usage-item__tag mono">01</span>
-                <div>
-                  <strong>Réhabilitation / Rénovation</strong>
-                  <p>Maquette pour piloter les travaux de rénovation.</p>
-                </div>
+          <div class="modelisation-left">
+            <div class="section-head section-head--left reveal">
+              <div>
+                <p class="section-tag">Expertise</p>
+                <h2 class="section-title">Modélisation<br/>de l'existant</h2>
+              </div>
+            </div>
+            <p class="modelisation-intro reveal reveal--d1">Remise en maquette numérique d'ouvrages existants à partir de plans ou de nuages de points.</p>
+            <ul class="modelisation-usages reveal reveal--d2">
+              <li>
+                <span class="usage-num">01</span>
+                <div><strong>Réhabilitation / Rénovation</strong><p>Maquette pour piloter les travaux de rénovation.</p></div>
               </li>
-              <li class="usage-item">
-                <span class="usage-item__tag mono">02</span>
-                <div>
-                  <strong>Mise en exploitation</strong>
-                  <p>Maquette telle que construite — DOE numérique.</p>
-                </div>
+              <li>
+                <span class="usage-num">02</span>
+                <div><strong>Mise en exploitation</strong><p>Maquette telle que construite — DOE numérique.</p></div>
               </li>
-              <li class="usage-item">
-                <span class="usage-item__tag mono">03</span>
-                <div>
-                  <strong>Communication</strong>
-                  <p>Visite virtuelle et valorisation du patrimoine bâti.</p>
-                </div>
+              <li>
+                <span class="usage-num">03</span>
+                <div><strong>Communication</strong><p>Visite virtuelle et valorisation du patrimoine bâti.</p></div>
               </li>
-              <li class="usage-item">
-                <span class="usage-item__tag mono">04</span>
-                <div>
-                  <strong>Gestion de chantier</strong>
-                  <p>Planification et suivi de chantier sur maquette.</p>
-                </div>
+              <li>
+                <span class="usage-num">04</span>
+                <div><strong>Gestion de chantier</strong><p>Planification et suivi de chantier sur maquette.</p></div>
               </li>
             </ul>
           </div>
 
-          <div class="modelisation-refs reveal reveal--d2">
-            <p class="label mono">Références</p>
-            <div class="ref-list">
-
-              <div class="ref">
-                <div class="ref__header">
-                  <span class="ref__cat mono">Logement social</span>
-                  <span class="ref__line"></span>
-                </div>
-                <h4 class="ref__name">Opération "Victoria"</h4>
-                <p class="ref__detail">220 logements + 20 commerces — Saint-André</p>
-                <p class="ref__mo mono">SHLMR / Action Logement</p>
+          <div class="modelisation-right reveal reveal--d2">
+            <p class="section-tag">Références</p>
+            <div class="refs-grid">
+              <div class="ref-card">
+                <span class="ref-card__cat">Logement social</span>
+                <h4>Opération "Victoria"</h4>
+                <p>220 logements + 20 commerces — Saint-André</p>
+                <p class="ref-card__mo">SHLMR / Action Logement</p>
               </div>
-
-              <div class="ref">
-                <div class="ref__header">
-                  <span class="ref__cat mono">Industrie</span>
-                  <span class="ref__line"></span>
-                </div>
-                <h4 class="ref__name">Opération "Danone" Le Port</h4>
-                <p class="ref__detail">Usine de production</p>
-                <p class="ref__mo mono">Danone / Groupe GBH</p>
+              <div class="ref-card">
+                <span class="ref-card__cat">Industrie</span>
+                <h4>Opération "Danone" Le Port</h4>
+                <p>Usine de production</p>
+                <p class="ref-card__mo">Danone / Groupe GBH</p>
               </div>
-
-              <div class="ref">
-                <div class="ref__header">
-                  <span class="ref__cat mono">Commerce</span>
-                  <span class="ref__line"></span>
-                </div>
-                <h4 class="ref__name">Carrefour Ste Clotilde</h4>
-                <p class="ref__detail">Centre commercial</p>
-                <p class="ref__mo mono">FICASA / Groupe GBH</p>
+              <div class="ref-card">
+                <span class="ref-card__cat">Commerce</span>
+                <h4>Carrefour Ste Clotilde</h4>
+                <p>Centre commercial</p>
+                <p class="ref-card__mo">FICASA / Groupe GBH</p>
               </div>
-
-              <div class="ref">
-                <div class="ref__header">
-                  <span class="ref__cat mono">Santé</span>
-                  <span class="ref__line"></span>
-                </div>
-                <h4 class="ref__name">CHU — Bloc opératoire</h4>
-                <p class="ref__detail">Bâtiment hospitalier — Saint-Denis</p>
-                <p class="ref__mo mono">CHU Félix Guyon</p>
+              <div class="ref-card">
+                <span class="ref-card__cat">Santé</span>
+                <h4>CHU — Bloc opératoire</h4>
+                <p>Bâtiment hospitalier — Saint-Denis</p>
+                <p class="ref-card__mo">CHU Félix Guyon</p>
               </div>
-
             </div>
           </div>
 
         </div>
-
       </div>
     </section>
 
     <!-- ══════════════════════════════════════════════════
          FORMATIONS BIM
     ══════════════════════════════════════════════════ -->
-    <section class="formations reveal-section" id="formations">
+    <section class="section formations" id="formations">
       <div class="container">
-
         <div class="section-head reveal">
-          <span class="mono section-index">04</span>
-          <h2 class="section-title">Formations BIM</h2>
-          <p class="section-sub mono">Certifié Qualiopi · N° 04 97 31 52 497</p>
+          <div>
+            <p class="section-tag">Certifié Qualiopi · N° 04 97 31 52 497</p>
+            <h2 class="section-title">Formations BIM</h2>
+          </div>
         </div>
 
-        <!-- Stats formations -->
+        <!-- Stats -->
         <div class="formations-stats reveal reveal--d1">
           <div class="fstat">
-            <span class="fstat__num mono" data-target="94">0</span><span class="fstat__unit mono">%</span>
-            <p>objectifs atteints</p>
+            <span class="fstat__num" data-target="94">0</span><span class="fstat__unit">%</span>
+            <p>des objectifs atteints en fin de formation</p>
           </div>
-          <div class="fstat__sep" aria-hidden="true"></div>
           <div class="fstat">
-            <span class="fstat__num mono" data-target="97">0</span><span class="fstat__unit mono">%</span>
-            <p>apprenants satisfaits</p>
+            <span class="fstat__num" data-target="97">0</span><span class="fstat__unit">%</span>
+            <p>des apprenants satisfaits</p>
           </div>
-          <div class="fstat__sep" aria-hidden="true"></div>
           <div class="fstat">
-            <span class="fstat__num mono" data-target="97">0</span><span class="fstat__unit mono">%</span>
-            <p>programme adapté</p>
+            <span class="fstat__num" data-target="97">0</span><span class="fstat__unit">%</span>
+            <p>du programme adapté aux besoins</p>
           </div>
         </div>
 
         <!-- Catalogue -->
         <div class="formations-grid reveal reveal--d2">
-
-          <div class="formation">
-            <span class="formation__h mono">35h</span>
+          <div class="formation-card">
+            <div class="formation-card__h">35h</div>
             <h4>REVIT Initiation</h4>
             <p>Prise en main complète du logiciel pour les professionnels du bâtiment.</p>
           </div>
-
-          <div class="formation">
-            <span class="formation__h mono">21h</span>
-            <h4>REVIT MEP / Fluides</h4>
-            <p>Fonctions avancées pour les corps d'état techniques.</p>
+          <div class="formation-card">
+            <div class="formation-card__h">21h</div>
+            <h4>REVIT Perfectionnement MEP</h4>
+            <p>Fonctions avancées pour les corps d'état techniques et fluides.</p>
           </div>
-
-          <div class="formation">
-            <span class="formation__h mono">14h</span>
-            <h4>REVIT Collaboratif</h4>
+          <div class="formation-card">
+            <div class="formation-card__h">14h</div>
+            <h4>REVIT Collaboratif BIM</h4>
             <p>Travail collaboratif et modèles partagés sous Revit.</p>
           </div>
-
-          <div class="formation">
-            <span class="formation__h mono">35h</span>
+          <div class="formation-card">
+            <div class="formation-card__h">35h</div>
             <h4>ArchiCAD Initiation</h4>
             <p>Découverte et maîtrise d'ArchiCAD pour architectes et ingénieurs.</p>
           </div>
-
-          <div class="formation">
-            <span class="formation__h mono">7h</span>
-            <h4>Outils BIM</h4>
+          <div class="formation-card">
+            <div class="formation-card__h">7h</div>
+            <h4>Manipulation d'Outils BIM</h4>
             <p>Tour d'horizon des outils de la chaîne numérique BIM.</p>
           </div>
-
-          <div class="formation">
-            <span class="formation__h mono">14h</span>
+          <div class="formation-card">
+            <div class="formation-card__h">14h</div>
             <h4>Gestion de projet BIM</h4>
             <p>Méthodologie et processus pour piloter un projet en BIM.</p>
           </div>
-
-          <div class="formation formation--featured">
-            <span class="formation__h mono">14h</span>
-            <h4>BIM pour la MOA</h4>
+          <div class="formation-card formation-card--featured">
+            <div class="formation-card__h">14h</div>
+            <h4>BIM pour la Maîtrise d'Ouvrage</h4>
             <p>Comprendre et piloter le BIM en tant que donneur d'ordre.</p>
           </div>
-
         </div>
-
       </div>
     </section>
 
     <!-- ══════════════════════════════════════════════════
          PARTENAIRES
     ══════════════════════════════════════════════════ -->
-    <section class="partenaires reveal-section">
+    <section class="partenaires">
       <div class="container">
-        <p class="label mono reveal">Partenaires</p>
+        <p class="section-tag reveal">Partenaires</p>
         <div class="partenaires-list reveal reveal--d1">
-          <div class="partenaire">
-            <strong>Arcad Ingénierie</strong>
+          <div class="partenaire-card">
+            <h4>Arcad Ingénierie</h4>
             <p>Acquisition et traitement de données 3D · scanner 3D</p>
           </div>
-          <div class="partenaire__sep" aria-hidden="true"></div>
-          <div class="partenaire">
-            <strong>Vibrason Production</strong>
+          <div class="partenaire-card">
+            <h4>Vibrason Production</h4>
             <p>Visite virtuelle et communication</p>
           </div>
         </div>
@@ -448,19 +418,20 @@
     <!-- ══════════════════════════════════════════════════
          CONTACT
     ══════════════════════════════════════════════════ -->
-    <section class="contact reveal-section" id="contact">
+    <section class="section contact" id="contact">
       <div class="container">
+        <div class="contact-layout">
 
-        <div class="section-head reveal">
-          <span class="mono section-index">05</span>
-          <h2 class="section-title">Parlons de<br/>votre projet</h2>
-        </div>
-
-        <div class="contact-grid">
-
-          <div class="contact-info reveal reveal--d1">
-            <p class="contact-name">Arnaud PLASSARD</p>
-            <p class="contact-role mono">Ingénieur BIM · Fondateur</p>
+          <div class="contact-left reveal">
+            <p class="section-tag">Contact</p>
+            <h2 class="section-title">Parlons de<br/>votre projet</h2>
+            <div class="contact-person">
+              <div class="contact-avatar">AP</div>
+              <div>
+                <strong>Arnaud PLASSARD</strong>
+                <p>Ingénieur BIM · Fondateur</p>
+              </div>
+            </div>
             <div class="contact-zones">
               <span>La Réunion</span>
               <span>Mayotte</span>
@@ -470,7 +441,7 @@
             </div>
           </div>
 
-          <form class="contact-form reveal reveal--d2" id="contact-form" novalidate>
+          <form class="contact-form reveal reveal--d1" id="contact-form" novalidate>
             <div class="form-row">
               <div class="form-field">
                 <label for="nom">Nom *</label>
@@ -500,12 +471,11 @@
               <label for="message">Message *</label>
               <textarea id="message" name="message" placeholder="Décrivez votre projet…" rows="5" required></textarea>
             </div>
-            <button type="submit" class="btn btn--orange btn--full">Envoyer le message</button>
+            <button type="submit" class="btn btn--green btn--full">Envoyer le message</button>
             <p class="form-notice" id="form-notice" role="alert" aria-live="polite"></p>
           </form>
 
         </div>
-
       </div>
     </section>
 
@@ -517,16 +487,16 @@
       <div class="footer-inner">
         <div>
           <img src="https://ebim-ing.re/images/ebim-logo.svg" alt="eBIM Ingénierie" class="footer-logo" />
-          <p class="footer-tag mono">BIM Management · La Réunion</p>
+          <p class="footer-tag">BIM Management · La Réunion</p>
         </div>
-        <nav class="footer-nav" aria-label="Navigation pied de page">
+        <nav class="footer-nav" aria-label="Pied de page">
           <a href="#accueil">Accueil</a>
-          <a href="#missions">Missions</a>
+          <a href="#missions">Missions BIM</a>
           <a href="#modelisation">Modélisation</a>
           <a href="#formations">Formations</a>
           <a href="#contact">Contact</a>
         </nav>
-        <p class="footer-copy mono">&copy; 2025 eBIM Ingénierie</p>
+        <p class="footer-copy">&copy; 2025 eBIM Ingénierie — Tous droits réservés</p>
       </div>
     </div>
   </footer>
