@@ -119,6 +119,67 @@ Organisme certifié Qualiopi. Déclaration d'activité n° 04 97 31 52 497.
 - Animations au scroll
 - Responsive mobile en priorité
 
+## Technique — Animation vidéo pilotée par le scroll (Scroll-driven frame animation)
+
+### Principe
+Pré-extraire les frames d'une vidéo en JPEG, les afficher en arrière-plan fixe via un `<img>` dont le `src` change en fonction du scroll. Le contenu du site s'affiche par-dessus avec des fonds semi-transparents.
+
+### Extraction des frames
+```bash
+ffmpeg -i video.mp4 -qscale:v 2 assets/videos/frames/frame-%04d.jpg
+```
+- `-qscale:v 2` : qualité maximale
+- Nombre de frames = durée × fps (ex: 5s × 24fps = 121 frames)
+
+### Structure HTML
+```html
+<!-- Juste après <body>, avant tout le contenu -->
+<img class="scroll-video-bg" id="scroll-video-bg" src="assets/videos/frames/frame-0001.jpg" alt="" />
+```
+
+### CSS
+```css
+.scroll-video-bg {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0; object-fit: cover; pointer-events: none;
+}
+main, footer { position: relative; z-index: 1; }
+/* Sections au-dessus : fonds semi-transparents (rgba) pour voir les frames */
+```
+
+### JavaScript — Points critiques
+1. **Position absolue d'un élément** : ne jamais utiliser `el.offsetTop` seul si un parent a `position: relative`. Remonter la chaîne `offsetParent` :
+   ```js
+   function getAbsoluteBottom(el) {
+     var top = 0;
+     var current = el;
+     while (current) {
+       top += current.offsetTop || 0;
+       current = current.offsetParent;
+     }
+     return top + el.offsetHeight;
+   }
+   ```
+2. **Endpoint** = position absolue du bas de la section cible − `window.innerHeight` (pour que la dernière frame apparaisse quand le bas de la section touche le bas du viewport).
+3. **Calculer dynamiquement** à chaque scroll (pas de cache) pour gérer les changements de layout (polices, images, resize).
+4. **Scroll restoration** : désactiver au refresh pour toujours démarrer en haut :
+   ```js
+   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+   window.scrollTo(0, 0);
+   ```
+5. **Pré-chargement** : créer `new Image()` pour chaque frame au démarrage pour éviter le clignotement.
+
+### Pièges rencontrés (à éviter)
+- `<canvas>` + `drawImage()` → instable, préférer un simple `<img>` avec changement de `src`
+- `<video>` + `currentTime` côté navigateur → trop lent et buggé
+- `offsetTop` avec `position: relative` sur un parent → valeur fausse, utiliser `offsetParent` chain
+- Cache du endpoint au `load` → peut être faux si le layout bouge après, recalculer à chaque scroll
+- Trop peu de frames (6-30) → animation saccadée, viser ≥ 60 frames
+- Fonds opaques sur les sections → masquent complètement l'arrière-plan, utiliser `rgba()`
+
+---
+
 ## Règles de travail
 - Commits en français, clairs et descriptifs
 - Toujours créer une Pull Request, jamais committer directement sur `main`
