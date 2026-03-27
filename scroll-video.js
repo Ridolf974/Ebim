@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════════
    eBIM Ingénierie — Arrière-plan vidéo piloté par le scroll
    · 121 frames JPEG en arrière-plan fixé
-   · Frame 1 en haut de page → Frame 121 au bas visible de Missions BIM
+   · Frame 1 en haut de page → Frame 121 au bas visible de Modélisation
    ══════════════════════════════════════════════════════════ */
 
 (function () {
@@ -12,8 +12,8 @@
   var FRAME_EXT    = '.jpg';
 
   var bg = document.getElementById('scroll-video-bg');
-  var missions = document.getElementById('missions');
-  if (!bg || !missions) return;
+  var endSection = document.getElementById('modelisation');
+  if (!bg || !endSection) return;
 
   /* Construire les chemins et pré-charger */
   var srcs = [];
@@ -28,22 +28,22 @@
 
   var currentIndex = 0;
 
-  /* Position absolue du bas de #missions (remonte les offsetParent) */
-  function getMissionsBottom() {
+  /* Position absolue du bas de la section cible (remonte les offsetParent) */
+  function getSectionBottom() {
     var top = 0;
-    var el = missions;
+    var el = endSection;
     while (el) {
       top += el.offsetTop || 0;
       el = el.offsetParent;
     }
-    return top + missions.offsetHeight;
+    return top + endSection.offsetHeight;
   }
 
   function update() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    /* endPoint = scroll où le bas de #missions touche le bas du viewport */
-    var endPoint = getMissionsBottom() - window.innerHeight;
+    /* endPoint = scroll où le bas de #modelisation touche le bas du viewport */
+    var endPoint = getSectionBottom() - window.innerHeight;
     if (endPoint <= 0) return;
 
     var progress = scrollTop / endPoint;
