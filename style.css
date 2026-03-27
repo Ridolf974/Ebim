@@ -203,7 +203,7 @@ main, footer { position: relative; z-index: 1; }
 ══════════════════════════════════════════════════════ */
 .hero {
   padding-top: var(--nav-h);
-  background: transparent;
+  background: rgba(255, 255, 255, 0.75);
   overflow: hidden;
 }
 .hero-inner {

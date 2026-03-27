@@ -1,59 +1,55 @@
 /* ══════════════════════════════════════════════════════════
    eBIM Ingénierie — Arrière-plan vidéo piloté par le scroll
-   · Change le src d'une <img> fixée en arrière-plan
-   · Les frames défilent proportionnellement au scroll
+   · 6 frames JPEG en arrière-plan fixé
+   · Change de frame proportionnellement au scroll de la page
    ══════════════════════════════════════════════════════════ */
 
 (function () {
   'use strict';
 
-  var TOTAL_FRAMES = 61;
+  var TOTAL_FRAMES = 6;
   var FRAME_PATH   = 'assets/videos/frames/frame-';
   var FRAME_EXT    = '.jpg';
 
   var bg = document.getElementById('scroll-video-bg');
   if (!bg) return;
 
-  /* Pré-construire tous les chemins de frames */
+  /* Construire les chemins et pré-charger */
   var srcs = [];
   for (var i = 0; i < TOTAL_FRAMES; i++) {
     var num = String(i + 1);
     while (num.length < 4) num = '0' + num;
     srcs.push(FRAME_PATH + num + FRAME_EXT);
+
+    /* Pré-charger l'image en mémoire */
+    var preload = new Image();
+    preload.src = srcs[i];
   }
 
-  /* Pré-charger toutes les images en mémoire */
-  var images = [];
-  for (var j = 0; j < TOTAL_FRAMES; j++) {
-    var img = new Image();
-    img.src = srcs[j];
-    images.push(img);
+  var currentIndex = 0;
+
+  function update() {
+    var scrollTop   = window.pageYOffset || document.documentElement.scrollTop;
+    var scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+
+    /* Éviter division par zéro */
+    if (scrollTotal <= 0) return;
+
+    var progress = scrollTop / scrollTotal;
+    progress = Math.max(0, Math.min(1, progress));
+
+    var index = Math.min(Math.floor(progress * TOTAL_FRAMES), TOTAL_FRAMES - 1);
+
+    if (index !== currentIndex) {
+      currentIndex = index;
+      bg.src = srcs[index];
+    }
   }
 
-  var currentIndex = -1;
-  var rafId = null;
+  /* Écouter le scroll */
+  window.addEventListener('scroll', update, { passive: true });
 
-  function onScroll() {
-    if (rafId) return;
-
-    rafId = requestAnimationFrame(function () {
-      rafId = null;
-
-      var scrollTop   = window.scrollY || document.documentElement.scrollTop;
-      var scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
-      var progress    = Math.max(0, Math.min(1, scrollTop / scrollTotal));
-      var index       = Math.round(progress * (TOTAL_FRAMES - 1));
-
-      if (index !== currentIndex) {
-        currentIndex = index;
-        bg.src = srcs[index];
-      }
-    });
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  /* Afficher la première frame immédiatement */
-  onScroll();
+  /* Premier rendu */
+  update();
 
 })();
