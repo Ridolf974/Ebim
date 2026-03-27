@@ -1,13 +1,13 @@
 /* ══════════════════════════════════════════════════════════
    eBIM Ingénierie — Arrière-plan vidéo piloté par le scroll
-   · 6 frames JPEG en arrière-plan fixé
-   · Frame 1 en haut de page → Frame 6 au début de Missions BIM
+   · 30 frames JPEG en arrière-plan fixé
+   · Frame 1 en haut de page → Frame 30 au début de Missions BIM
    ══════════════════════════════════════════════════════════ */
 
 (function () {
   'use strict';
 
-  var TOTAL_FRAMES = 6;
+  var TOTAL_FRAMES = 30;
   var FRAME_PATH   = 'assets/videos/frames/frame-';
   var FRAME_EXT    = '.jpg';
 
