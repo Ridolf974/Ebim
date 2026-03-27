@@ -32,7 +32,7 @@
   /* Calculer le point final après chargement complet de la page
      (polices, images, etc. peuvent décaler la mise en page) */
   function calcEndPoint() {
-    endPoint = missions.offsetTop + missions.offsetHeight;
+    endPoint = missions.offsetTop + missions.offsetHeight - window.innerHeight;
   }
 
   window.addEventListener('load', calcEndPoint);
