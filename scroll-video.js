@@ -7,31 +7,32 @@
 (function () {
   'use strict';
 
-  var TOTAL_FRAMES = 121;
-  var FRAME_PATH   = 'assets/videos/frames/frame-';
-  var FRAME_EXT    = '.jpg';
+  const TOTAL_FRAMES = 121;
+  const FRAME_PATH   = 'assets/videos/frames/frame-';
+  const FRAME_EXT    = '.jpg';
 
-  var bg = document.getElementById('scroll-video-bg');
-  var endSection = document.getElementById('modelisation');
+  const bg = document.getElementById('scroll-video-bg');
+  const endSection = document.getElementById('modelisation');
   if (!bg || !endSection) return;
 
-  /* Construire les chemins et pré-charger */
-  var srcs = [];
-  for (var i = 0; i < TOTAL_FRAMES; i++) {
-    var num = String(i + 1);
-    while (num.length < 4) num = '0' + num;
+  /* Construire les chemins et pré-charger (stockés pour éviter le GC) */
+  const srcs  = [];
+  const cache = [];
+  for (let i = 0; i < TOTAL_FRAMES; i++) {
+    const num = String(i + 1).padStart(4, '0');
     srcs.push(FRAME_PATH + num + FRAME_EXT);
 
-    var preload = new Image();
+    const preload = new Image();
     preload.src = srcs[i];
+    cache.push(preload);
   }
 
-  var currentIndex = 0;
+  let currentIndex = 0;
 
   /* Position absolue du bas de la section cible (remonte les offsetParent) */
   function getSectionBottom() {
-    var top = 0;
-    var el = endSection;
+    let top = 0;
+    let el = endSection;
     while (el) {
       top += el.offsetTop || 0;
       el = el.offsetParent;
@@ -40,16 +41,16 @@
   }
 
   function update() {
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
     /* endPoint = scroll où le bas de #modelisation touche le bas du viewport */
-    var endPoint = getSectionBottom() - window.innerHeight;
+    const endPoint = getSectionBottom() - window.innerHeight;
     if (endPoint <= 0) return;
 
-    var progress = scrollTop / endPoint;
+    let progress = scrollTop / endPoint;
     progress = Math.max(0, Math.min(1, progress));
 
-    var index = Math.min(Math.round(progress * (TOTAL_FRAMES - 1)), TOTAL_FRAMES - 1);
+    const index = Math.min(Math.round(progress * (TOTAL_FRAMES - 1)), TOTAL_FRAMES - 1);
 
     if (index !== currentIndex) {
       currentIndex = index;
