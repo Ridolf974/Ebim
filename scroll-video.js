@@ -2,6 +2,7 @@
    eBIM Ingénierie — Arrière-plan vidéo piloté par le scroll
    · 121 frames JPEG en arrière-plan fixé
    · Frame 1 en haut de page → Frame 121 au bas visible de Modélisation
+   · Re-préchargement au retour d'onglet inactif
    ══════════════════════════════════════════════════════════ */
 
 (function () {
@@ -15,19 +16,36 @@
   const endSection = document.getElementById('modelisation');
   if (!bg || !endSection) return;
 
-  /* Construire les chemins et pré-charger (stockés pour éviter le GC) */
-  const srcs  = [];
-  const cache = [];
+  /* Construire les chemins */
+  const srcs = [];
   for (let i = 0; i < TOTAL_FRAMES; i++) {
     const num = String(i + 1).padStart(4, '0');
     srcs.push(FRAME_PATH + num + FRAME_EXT);
-
-    const preload = new Image();
-    preload.src = srcs[i];
-    cache.push(preload);
   }
 
+  /* Pré-charger toutes les frames en mémoire (stockées pour éviter le GC) */
+  let cache = [];
+  function preloadFrames() {
+    cache = [];
+    for (let i = 0; i < TOTAL_FRAMES; i++) {
+      const img = new Image();
+      img.src = srcs[i];
+      cache.push(img);
+    }
+  }
+  preloadFrames();
+
+  /* Re-précharger quand l'onglet redevient actif (le navigateur
+     libère les images décodées des onglets inactifs) */
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) {
+      preloadFrames();
+      update();
+    }
+  });
+
   let currentIndex = 0;
+  let ticking = false;
 
   /* Position absolue du bas de la section cible (remonte les offsetParent) */
   function getSectionBottom() {
@@ -56,9 +74,19 @@
       currentIndex = index;
       bg.src = srcs[index];
     }
+
+    ticking = false;
   }
 
-  window.addEventListener('scroll', update, { passive: true });
+  /* Utiliser requestAnimationFrame pour lisser les mises à jour */
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('load', update);
   update();
 
