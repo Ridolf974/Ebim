@@ -137,12 +137,10 @@
       btn.disabled    = true;
       btn.textContent = 'Envoi…';
 
-      setTimeout(function () {
-        form.reset();
-        btn.disabled    = false;
-        btn.textContent = 'Envoyer le message';
-        showNotice('Message envoyé ! Nous vous répondrons rapidement.', 'success');
-      }, 1200);
+      /* TODO : connecter à un vrai backend (Formspree, Netlify Forms, API custom) */
+      btn.disabled    = false;
+      btn.textContent = 'Envoyer le message';
+      showNotice('Le formulaire n\'est pas encore connecté. Veuillez nous contacter directement par email.', 'error');
     });
   }
 
